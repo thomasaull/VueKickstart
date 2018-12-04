@@ -1,29 +1,55 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
+      <router-link to="/">Home</router-link>|
       <router-link to="/about">About</router-link>
     </div>
     <router-view/>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+import FontFaceObserver from 'fontfaceobserver'
+import DefaultLayout from '@/layouts/DefaultLayout'
+import NakedLayout from '@/layouts/NakedLayout'
+
+export default {
+  name: 'App',
+  components: { DefaultLayout, NakedLayout }, // eslint-disable-line
+
+  computed: {
+    layout() {
+      if (this.$route.meta.layout) return `${this.$route.meta.layout}Layout`
+      return 'DefaultLayout'
+    }
+  },
+
+  created() {
+    // observe loaded fonts
+    let font = new FontFaceObserver('Meta')
+
+    font.load().then(() => {
+      document.querySelector('body').classList.add('-fontsLoaded')
+      console.log('fonts loaded')
+      this.setCookie('fontsLoaded', true, 30)
+    })
+  },
+
+  methods: {
+    setCookie(name, value, days) {
+      var d = new Date()
+      d.setTime(d.getTime() + 24 * 60 * 60 * 1000 * days)
+      document.cookie =
+        name + '=' + value + ';path=/;expires=' + d.toGMTString()
     }
   }
 }
+</script>
+
+
+<style lang="scss">
+@import '../node_modules/normalize.css/normalize.css';
+@import './assets/scss/modifyNormalize.scss';
+@import './assets/scss/default.scss';
+@import './assets/scss/defaultText.scss';
 </style>
