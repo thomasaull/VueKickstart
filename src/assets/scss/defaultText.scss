@@ -86,7 +86,7 @@
       margin-bottom: 0.4em;
 
       &::before {
-        content: counter(list-counter) ".\00A0";
+        content: counter(list-counter) '.\00A0';
         user-select: none;
         font-weight: bold;
       }
