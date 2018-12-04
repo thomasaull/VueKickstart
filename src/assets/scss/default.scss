@@ -1,0 +1,88 @@
+// Linear Gradients, Source: https://www.npmjs.com/package/postcss-easing-gradients
+// background: linear-gradient(90deg, rgba($colorBackground-grey, 1), ease, rgba($colorBackground-grey, 0));
+
+// Interpolate Mixing
+// @include interpolate(font-size padding, 500px, 1200px, 26px, 44px);
+
+:root {
+  @include interpolate(
+    --fontSize-default,
+    $contentMinWidth,
+    $contentMaxWidth,
+    14.5px,
+    16px
+  );
+
+  --fontSize-large: 20px;
+  --lineHeight-default: 1.4;
+  --color-key: #{$color-key};
+
+  // Media Queries für responsive Anpassung hier
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  min-width: 100%;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  // -webkit-text-stroke: 0.2px rgba(0,0,0, 0.5) // wenn Text in Webkit zu dünn
+  // text-shadow: #fff 0px 1px 1px; // Wenn Text in allen Browsern zu dünn
+
+  // Source: https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/
+  // These are technically the same, but use both
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  // Prevent iOS to enlarge font-size
+  -webkit-text-size-adjust: none;
+
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  @include media("<=600px") {
+    /* Adds a hyphen where the word breaks, if supported (No Blink) */
+    hyphens: auto;
+  }
+
+  // Using CSS Variables to avoid Flash of Invisible Text
+  font: var(--fontSize-default) / var(--lineHeight-default) $fontStack-system; // Fallback
+
+  --fontStack-default: #{$fontStack-system};
+
+  &.-fontsLoaded {
+    font-family: $fontStack-default;
+
+    --fontStack-default: #{$fontStack-default};
+  }
+}
+
+// Border Box Everything
+* { box-sizing: border-box; }
+
+// Default Styles for Buttons
+button {
+  border: none;
+  background: none;
+  font: var(--fontSize-default) var(--fontStack-defualt);
+}
+
+// Defaults for Form
+input,
+textarea {
+  font: var(--fontSize-default) var(--fontStack-defualt);
+}
+
+// No Focus outlines, don't forget to define by yourself!
+input:focus,
+textarea:focus,
+button:focus { outline: none; }
+
+// Default Styles for Links
+a {
+  text-decoration: none;
+  color: currentColor;
+}
