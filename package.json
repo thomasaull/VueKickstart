@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "lint:style": "vue-cli-service lint:style"
   },
   "dependencies": {
     "vue": "^2.5.17",
@@ -13,6 +14,7 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "@ascendancyy/vue-cli-plugin-stylelint": "^1.1.0",
     "@vue/cli-plugin-babel": "^3.2.0",
     "@vue/cli-plugin-eslint": "^3.2.1",
     "@vue/cli-service": "^3.2.0",
@@ -23,6 +25,11 @@
     "lint-staged": "^7.2.2",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
+    "stylelint-config-prettier": "^4.0.0",
+    "stylelint-config-standard": "^18.2.0",
+    "stylelint-scss": "^3.4.0",
+    "stylelint-selector-bem-pattern": "^2.0.0",
+    "vue-svg-loader": "^0.11.0",
     "vue-template-compiler": "^2.5.17"
   },
   "gitHooks": {
@@ -35,6 +42,10 @@
     ],
     "*.vue": [
       "vue-cli-service lint",
+      "git add"
+    ],
+    "*.{vue,htm,html,css,sss,less,scss}": [
+      "vue-cli-service lint:style",
       "git add"
     ]
   }
