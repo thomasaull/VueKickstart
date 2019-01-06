@@ -1,13 +1,9 @@
  <template>
-  <div class="App">
-    <component :is="layout">
-      <router-view :key="$route.meta.id"/>
-    </component>
-  </div>
+  <div class="App" id="app">This is my app</div>
 </template>
 
 <script>
-import FontFaceObserver from 'fontfaceobserver'
+// import FontFaceObserver from 'fontfaceobserver'
 import DefaultLayout from '@/layouts/DefaultLayout'
 import NakedLayout from '@/layouts/NakedLayout'
 
@@ -24,13 +20,12 @@ export default {
 
   created() {
     // observe loaded fonts
-    let font = new FontFaceObserver('Meta')
-
-    font.load().then(() => {
-      document.querySelector('body').classList.add('-fontsLoaded')
-      console.log('fonts loaded')
-      this.setCookie('fontsLoaded', true, 30)
-    })
+    // let font = new FontFaceObserver('Meta')
+    // font.load().then(() => {
+    //   document.querySelector('body').classList.add('-fontsLoaded')
+    //   console.log('fonts loaded')
+    //   this.setCookie('fontsLoaded', true, 30)
+    // })
   },
 
   methods: {
@@ -46,7 +41,8 @@ export default {
 
 
 <style lang="scss">
-@import '../node_modules/reset-css/reset.css';
+// @import '../node_modules/normalize.css/normalize.css';
+// @import './assets/scss/modifyNormalize.scss';
 @import './assets/scss/default.scss';
 @import './assets/scss/defaultText.scss';
 </style>
