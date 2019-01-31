@@ -27,7 +27,8 @@ module.exports = {
   plugins: [
     '@/plugins/all',
     { src: '@/plugins/frontend', ssr: false },
-    { src: '@/plugins/route' }
+    { src: '@/plugins/route' },
+    { src: '@/plugins/foo' }
   ],
 
   generate: {
@@ -41,6 +42,10 @@ module.exports = {
   },
 
   loading: false,
+
+  server: {
+    port: 8080
+  },
 
   build: {
     extend(config, { isDev }) {

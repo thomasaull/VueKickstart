@@ -4,6 +4,7 @@
 
 <script>
 export default {
-  name: 'Home'
+  name: 'Home',
+  layout: process.env.VUE_APP_DEFAULT_LAYOUT
 }
 </script>
