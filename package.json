@@ -3,45 +3,55 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "build:report": "vue-cli-service build --report",
+    "vue:serve": "vue-cli-service serve",
+    "vue:build": "vue-cli-service build",
+    "vue:build:report": "vue-cli-service build --report",
+    "nuxt:serve": "nuxt",
+    "nuxt:generate": "nuxt generate",
+    "nuxt:build": "nuxt build",
+    "nuxt:build:analyze": "nuxt build --analyze",
     "lint": "vue-cli-service lint",
-    "lint:style": "vue-cli-service lint:style",
-    "prerender": "vue-cli-service prerender"
+    "lint:style": "vue-cli-service lint:style"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "fontfaceobserver": "^2.1.0",
+    "gsap": "^2.0.2",
     "include-media": "^1.4.9",
-    "lazysizes": "^4.1.4",
+    "intersection-observer": "^0.5.1",
+    "lazysizes": "^4.1.5",
+    "lodash": "^4.17.11",
     "lodash-es": "^4.17.11",
     "normalize.css": "^8.0.1",
-    "vue": "^2.5.17",
-    "vue-router": "^3.0.1",
-    "vuex": "^3.0.1",
-    "reset-css": "^4.0.1"
+    "nuxt": "^2.3.4",
+    "portal-vue": "^1.5.0",
+    "reset-css": "^4.0.1",
+    "scrollama": "^1.4.4",
+    "vue": "^2.5.21",
+    "vue-meta": "^1.5.8",
+    "vue-router": "^3.0.2",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@ascendancyy/vue-cli-plugin-stylelint": "^1.1.0",
+    "@nuxtjs/style-resources": "^0.1.1",
     "@vue/cli-plugin-babel": "^3.2.0",
     "@vue/cli-plugin-eslint": "^3.2.1",
     "@vue/cli-service": "^3.2.0",
-    "@vue/eslint-config-prettier": "^4.0.0",
+    "@vue/eslint-config-prettier": "^4.0.1",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.8.0",
-    "eslint-plugin-vue": "^5.0.0-0",
-    "lint-staged": "^7.2.2",
+    "eslint": "^5.11.1",
+    "eslint-plugin-vue": "^5.0.0",
+    "lint-staged": "^8.1.0",
     "modularscale-sass": "^3.0.8",
-    "node-sass": "^4.9.0",
-    "prerender-spa-plugin": "^3.4.0",
-    "sass-loader": "^7.0.1",
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0",
     "stylelint-config-prettier": "^4.0.0",
     "stylelint-config-standard": "^18.2.0",
-    "stylelint-scss": "^3.4.0",
+    "stylelint-scss": "^3.4.4",
     "stylelint-selector-bem-pattern": "^2.0.0",
     "vue-svg-loader": "^0.11.0",
-    "vue-template-compiler": "^2.5.17"
+    "vue-template-compiler": "^2.5.21"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
@@ -58,11 +68,6 @@
     "*.{vue,htm,html,css,sss,less,scss}": [
       "vue-cli-service lint:style",
       "git add"
-    ]
-  },
-  "vuePlugins": {
-    "service": [
-      "./plugins/prerender.js"
     ]
   }
 }

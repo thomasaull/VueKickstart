@@ -1,8 +1,6 @@
- <template>
+<template>
   <div class="App">
-    <component :is="layout">
-      <router-view :key="$route.meta.id"/>
-    </component>
+    <component :is="layout"> <router-view :key="$route.meta.id" /> </component>
   </div>
 </template>
 
@@ -44,9 +42,12 @@ export default {
 }
 </script>
 
-
 <style lang="scss">
 @import '../node_modules/reset-css/reset.css';
-@import './assets/scss/default.scss';
-@import './assets/scss/defaultText.scss';
+// @import './assets/scss/default.scss';
+// @import './assets/scss/defaultText.scss';
+
+.App {
+  color: red;
+}
 </style>

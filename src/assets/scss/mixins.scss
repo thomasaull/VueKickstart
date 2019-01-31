@@ -1,0 +1,80 @@
+@mixin textLabel {
+  font: 600 $fontSize-small $fontStack-default;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.5;
+}
+
+@mixin svgIcon {
+  display: flex;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5px;
+
+  & svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  & svg [id*='.color'] {
+    stroke: $color-key;
+  }
+}
+
+@mixin transition-hover {
+  transition: all 0.2s;
+  transition-property: color;
+
+  &:hover {
+    transition: all 0.1s;
+    transition-property: color;
+  }
+}
+
+@mixin container {
+  width: 100%;
+  max-width: $contentMaxWidth;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@mixin containerPaddingHorizontal {
+  @include interpolate(
+    padding-left padding-right,
+    $contentMinWidth,
+    $contentMaxWidth,
+    $paddingMin,
+    $paddingMax
+  );
+}
+
+@mixin containerPaddingAll {
+  @include interpolate(
+    padding,
+    $contentMinWidth,
+    $contentMaxWidth,
+    $paddingMin,
+    $paddingMax
+  );
+}
+
+@mixin fullWidth {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+// Usage:
+// @include font-face("Meta", "/fonts/MetaPro-Normal");
+// @include font-face("Meta", "/fonts/MetaPro-Bold", bold);
+@mixin font-face($name, $file, $weight: null, $style: null) {
+  @font-face {
+    font-family: $name;
+    src: url($file+'.woff2') format('woff2'), url($file+'.woff') format('woff');
+    font-weight: $weight;
+    font-style: $style;
+  }
+}
