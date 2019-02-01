@@ -1,16 +1,17 @@
 <template>
-  <div>
-    <nuxt />
+  <div class="App">
+    <component :is="layout"><nuxt /></component>
   </div>
 </template>
 
 <script>
 import has from 'lodash/has'
-import lazysizes from '@/mixins/lazysizes'
+import DefaultLayout from '@/layouts/DefaultLayout'
+import NakedLayout from '@/layouts/NakedLayout'
 
 export default {
-  name: 'default',
-  mixins: [lazysizes],
+  name: 'App',
+  components: { DefaultLayout, NakedLayout }, // eslint-disable-line
 
   head() {
     return {
@@ -19,6 +20,11 @@ export default {
   },
 
   computed: {
+    layout() {
+      if (this.$route.meta.layout) return `${this.$route.meta.layout}Layout`
+      return 'DefaultLayout'
+    },
+
     routerKey() {
       if (has(this.$route, 'meta.root.id')) {
         if (this.$route.meta.root.template === 'info')

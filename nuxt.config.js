@@ -1,6 +1,8 @@
 const loadEnv = require('@vue/cli-service/lib/util/loadEnv')
 import axios from 'axios'
 import scssResources from './config/scssResources'
+import forEach from 'lodash/forEach'
+import startsWith from 'lodash/startsWith'
 
 import fs from 'fs'
 
@@ -8,9 +10,20 @@ if (fs.existsSync(`.env`)) {
   loadEnv(`.env`)
 }
 
+if (fs.existsSync(`.env.${process.env.NODE_ENV}.local`)) {
+  loadEnv(`.env.${process.env.NODE_ENV}.local`)
+}
+
 if (fs.existsSync(`.env.${process.env.NODE_ENV}`)) {
   loadEnv(`.env.${process.env.NODE_ENV}`)
 }
+
+let environmentVariablesForClient = {}
+forEach(process.env, (value, key) => {
+  if (startsWith(key, 'VUE_APP')) {
+    environmentVariablesForClient[key] = value
+  }
+})
 
 module.exports = {
   mode: 'universal',
@@ -46,6 +59,8 @@ module.exports = {
   server: {
     port: 8080
   },
+
+  env: environmentVariablesForClient,
 
   build: {
     extend(config, { isDev }) {
