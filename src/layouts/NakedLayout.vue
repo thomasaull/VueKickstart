@@ -1,5 +1,6 @@
 <template>
-  <div class="LayoutNaked">Naked Layout:
-    <slot/>
+  <div class="LayoutNaked">
+    Naked Layout:
+    <slot />
   </div>
 </template>

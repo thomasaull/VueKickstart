@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style lang="scss">
-/* stylelint-disable*/
+/* stylelint-disable */
 @import '@/assets/scss/default.scss';
 @import '@/assets/scss/defaultText.scss';
 
