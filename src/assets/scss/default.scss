@@ -43,7 +43,7 @@ body {
   -webkit-text-size-adjust: none;
 
   /* Adds a hyphen where the word breaks, if supported (No Blink) */
-  @include media("<=600px") {
+  @include media('<=600px') {
     /* Adds a hyphen where the word breaks, if supported (No Blink) */
     hyphens: auto;
   }
@@ -61,25 +61,29 @@ body {
 }
 
 // Border Box Everything
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 // Default Styles for Buttons
 button {
   border: none;
   background: none;
-  font: var(--fontSize-default) var(--fontStack-defualt);
+  font: var(--fontSize-default) var(--fontStack-default);
 }
 
 // Defaults for Form
 input,
 textarea {
-  font: var(--fontSize-default) var(--fontStack-defualt);
+  font: var(--fontSize-default) var(--fontStack-default);
 }
 
 // No Focus outlines, don't forget to define by yourself!
 input:focus,
 textarea:focus,
-button:focus { outline: none; }
+button:focus {
+  outline: none;
+}
 
 // Default Styles for Links
 a {

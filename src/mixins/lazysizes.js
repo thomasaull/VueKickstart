@@ -20,6 +20,10 @@ export default {
     createSvgPlaceholder(width, height, color = 'transparent') {
       color = encodeURIComponent(color)
       return `data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}"%3E%3Crect width="100%" height="100%" fill="${color}" %2F%3E%3C/svg%3E`
+    },
+
+    createTransparentPngPlaceholder() {
+      return 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
     }
   }
 }

@@ -6,7 +6,7 @@
 	],
 	"settings": {
 		"search.exclude": {
-			"\"**/.nuxt": true
+			"**/.nuxt": true
 		}
 	}
 }
