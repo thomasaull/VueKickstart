@@ -1,6 +1,16 @@
-export const state = () => ({})
+import forEach from 'lodash/forEach'
 
-export const mutations = {}
+export const state = () => ({
+  touchEnabled: false
+})
+
+export const mutations = {
+  set(state, data) {
+    forEach(data, (value, key) => {
+      state[key] = value
+    })
+  }
+}
 
 export const getters = {}
 

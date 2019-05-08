@@ -22,30 +22,20 @@ export default {
 
   created() {
     // observe loaded fonts
-    let font = new FontFaceObserver('Meta')
+    let font = new FontFaceObserver('Fontname')
 
     font.load().then(() => {
       document.querySelector('body').classList.add('-fontsLoaded')
-      console.log('fonts loaded')
-      this.setCookie('fontsLoaded', true, 30)
     })
-  },
-
-  methods: {
-    setCookie(name, value, days) {
-      var d = new Date()
-      d.setTime(d.getTime() + 24 * 60 * 60 * 1000 * days)
-      document.cookie =
-        name + '=' + value + ';path=/;expires=' + d.toGMTString()
-    }
   }
 }
 </script>
 
 <style lang="scss">
 @import '../node_modules/reset-css/reset.css';
-// @import './assets/scss/default.scss';
-// @import './assets/scss/defaultText.scss';
+@import './assets/scss/default.scss';
+@import './assets/scss/reset.scss';
+@import './assets/scss/defaultText.scss';
 
 .App {
   color: red;

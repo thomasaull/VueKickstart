@@ -1,13 +1,15 @@
-const loadEnv = require('@vue/cli-service/lib/util/loadEnv')
 import axios from 'axios'
 import scssResources from './config/scssResources'
 import forEach from 'lodash/forEach'
 import startsWith from 'lodash/startsWith'
-
+import svgoPlugins from './config/svgoPlugins'
+import dotenv from 'dotenv'
+import dotenvExpand from 'dotenv-expand'
 import fs from 'fs'
 
-if (fs.existsSync(`.env`)) {
-  loadEnv(`.env`)
+function loadEnv(path) {
+  const env = dotenv.config({ path, debug: process.env.DEBUG })
+  dotenvExpand(env)
 }
 
 if (fs.existsSync(`.env.${process.env.NODE_ENV}.local`)) {
@@ -16,6 +18,10 @@ if (fs.existsSync(`.env.${process.env.NODE_ENV}.local`)) {
 
 if (fs.existsSync(`.env.${process.env.NODE_ENV}`)) {
   loadEnv(`.env.${process.env.NODE_ENV}`)
+}
+
+if (fs.existsSync(`.env`)) {
+  loadEnv(`.env`)
 }
 
 let environmentVariablesForClient = {}
@@ -63,10 +69,27 @@ module.exports = {
   env: environmentVariablesForClient,
 
   build: {
-    extend(config, { isDev }) {
+    extend(config, { isDev, isClient }) {
       if (!isDev) {
         config.output.publicPath = '/site/templates/dist/_nuxt/'
       }
+
+      if (isClient) {
+        config.devtool = '#source-map'
+      }
+
+      const svgRule = config.module.rules.find(rule => rule.test.test('.svg'))
+      svgRule.test = /\.(png|jpe?g|gif|webp)$/
+      config.module.rules.push({
+        test: /\.svg$/,
+        loader: 'vue-svg-loader',
+        options: {
+          svgo: {
+            plugins: svgoPlugins
+          }
+        }
+      })
+
       return config
     }
   },

@@ -6,6 +6,7 @@
 
 <script>
 import has from 'lodash/has'
+import FontFaceObserver from 'fontfaceobserver'
 import DefaultLayout from '@/layouts/DefaultLayout'
 import NakedLayout from '@/layouts/NakedLayout'
 
@@ -33,6 +34,29 @@ export default {
 
       return String(this.$route.meta.id)
     }
+  },
+
+  created() {
+    if (!process.client) return
+
+    // observe loaded fonts
+    let font = new FontFaceObserver('Fontname')
+
+    font.load().then(() => {
+      document.querySelector('body').classList.add('-fontsLoaded')
+    })
+
+    window.addEventListener('touchstart', this.activateTouchInterface)
+  },
+
+  beforeDestroy() {
+    window.removeEventListener('touchstart', this.activateTouchInterface)
+  },
+
+  methods: {
+    activateTouchInterface() {
+      this.$store.commit('set', { touchEnabled: true })
+    }
   }
 }
 </script>
@@ -40,6 +64,7 @@ export default {
 <style lang="scss">
 /* stylelint-disable */
 @import '@/assets/scss/default.scss';
+@import '@/assets/scss/reset.scss';
 @import '@/assets/scss/defaultText.scss';
 
 // @include font-face('PxGrotesk', '/fonts/PxGrotesk-Regular');
