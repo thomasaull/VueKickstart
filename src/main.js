@@ -6,9 +6,12 @@ import { state, mutations, getters, actions } from '@/store'
 import axios from 'axios'
 import Vuex from 'vuex'
 import Icon from '@/components/Icon'
+import EventHub from '@/EventHub'
 
 Vue.config.productionTip = false
-Vue.prototype.$eventHub = new Vue()
+
+Vue.prototype.$eventHub = EventHub
+
 Vue.use(Vuex)
 
 // Global Components
