@@ -1,5 +1,5 @@
 <template>
-  <component :is="svg" />
+  <component :is="svg" class="Icon" v-on="$listeners" />
 </template>
 
 <script>
@@ -8,7 +8,7 @@ export default {
 
   data() {
     return {
-      svg: () => import(`@/assets/svg/${this.name}.svg`)
+      svg: undefined
     }
   },
 
@@ -17,6 +17,13 @@ export default {
       type: String,
       required: true
     }
+  },
+
+  async created() {
+    const loaded = await import(/* webpackMode: "eager" */ `@/assets/svg/${
+      this.name
+    }.svg`)
+    this.svg = loaded.default
   }
 }
 </script>
