@@ -55,3 +55,9 @@ $modularscale: (
     ratio: $major-third
   )
 );
+
+/* stylelint-disable */
+:export {
+  color-key: $color-key;
+  colorText: $colorText;
+}
