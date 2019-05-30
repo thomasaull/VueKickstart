@@ -55,7 +55,7 @@ export default {
 
   methods: {
     activateTouchInterface() {
-      this.$store.commit('set', { touchEnabled: true })
+      this.$store.commit('set', { touchInterface: true })
     }
   }
 }

@@ -1,23 +1,19 @@
-@mixin textLabel {
-  font: 600 $fontSize-small $fontStack-default;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  opacity: 0.5;
-}
-
 @mixin svgIcon {
-  display: flex;
+  width: 100%;
+  height: 100%;
   fill: none;
   stroke: currentColor;
-  stroke-width: 1.5px;
+  stroke-width: 2px;
+  overflow: visible;
+  display: block;
 
-  & svg {
-    width: 100%;
-    height: 100%;
+  & [id*='.fill'] {
+    fill: currentColor;
+    stroke: none;
   }
 
-  & svg [id*='.color'] {
-    stroke: $color-key;
+  & * {
+    vector-effect: non-scaling-stroke;
   }
 }
 
@@ -37,24 +33,9 @@
   margin-right: auto;
 }
 
-@mixin containerPaddingHorizontal {
-  @include interpolate(
-    padding-left padding-right,
-    $contentMinWidth,
-    $contentMaxWidth,
-    $paddingMin,
-    $paddingMax
-  );
-}
-
-@mixin containerPaddingAll {
-  @include interpolate(
-    padding,
-    $contentMinWidth,
-    $contentMaxWidth,
-    $paddingMin,
-    $paddingMax
-  );
+@mixin containerWrap {
+  padding-left: var(--spaceSmallest);
+  padding-right: var(--spaceSmallest);
 }
 
 @mixin fullWidth {
@@ -73,6 +54,10 @@
   @font-face {
     font-family: $name;
     src: url($file+'.woff2') format('woff2'), url($file+'.woff') format('woff');
+    // src: url($file+'.eot');
+    // src: url($file+'.eot?#iefix') format('embedded-opentype'),
+    //   url($file+'.woff2') format('woff2'), url($file+'.woff') format('woff'),
+    //   url($file+'.ttf') format('truetype');
     font-weight: $weight;
     font-style: $style;
   }

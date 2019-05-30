@@ -1,7 +1,7 @@
 import forEach from 'lodash/forEach'
 
 export const state = () => ({
-  touchEnabled: false
+  touchInterface: false
 })
 
 export const mutations = {

@@ -5,10 +5,14 @@ import { createRouter } from '@/router'
 import { state, mutations, getters, actions } from '@/store'
 import axios from 'axios'
 import Vuex from 'vuex'
+import Icon from '@/components/Icon'
 
 Vue.config.productionTip = false
 Vue.prototype.$eventHub = new Vue()
 Vue.use(Vuex)
+
+// Global Components
+Vue.component('Icon', Icon)
 
 axios.defaults.baseURL = process.env.VUE_APP_API_URL
 
