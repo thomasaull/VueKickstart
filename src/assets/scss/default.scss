@@ -50,6 +50,7 @@ body {
 
   // Using CSS Variables to avoid Flash of Invisible Text
   font: var(--fontSize-default) / var(--lineHeight-default) $fontStack-system; // Fallback
+  font-display: swap;
 
   --fontStack-default: #{$fontStack-system};
 
