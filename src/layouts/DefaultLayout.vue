@@ -2,6 +2,10 @@
   <div class="DefaultLayout">
     Default Layout:
     <slot />
+
+    <!-- <div class="DefaultLayout-notifications">
+      <slot name="notifications" />
+    </div> -->
   </div>
 </template>
 

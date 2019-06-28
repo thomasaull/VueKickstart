@@ -1,10 +1,21 @@
 <template>
   <div class="App">
     <component :is="layout"><nuxt /></component>
+
+    <template v-slot:notifications>
+      <Notifications />
+    </template>
+
+    <ErrorModal
+      @close="$store.commit('error/markAsRead', latestUnreadError.id)"
+      v-if="latestUnreadError"
+      :error="latestUnreadError"
+    />
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import has from 'lodash/has'
 import FontFaceObserver from 'fontfaceobserver'
 import DefaultLayout from '@/layouts/DefaultLayout'
@@ -21,6 +32,8 @@ export default {
   },
 
   computed: {
+    ...mapGetters('error', { latestUnreadError: 'latestUnread' }),
+
     layout() {
       if (this.$route.meta.layout) return `${this.$route.meta.layout}Layout`
       return 'DefaultLayout'
