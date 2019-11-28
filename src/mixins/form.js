@@ -3,7 +3,7 @@ import ValidForm from '@pageclip/valid-form'
 
 export default {
   methods: {
-    formInitValidator(form) {
+    form_initValidator(form) {
       ValidForm(form, {
         invalidClass: 'is-danger',
         errorPlacement: 'after',
@@ -11,7 +11,7 @@ export default {
       })
     },
 
-    formHasErrors(form) {
+    form_hasErrors(form) {
       const error = find(form.querySelectorAll('input'), input => {
         return input.validity.valid !== true
       })
