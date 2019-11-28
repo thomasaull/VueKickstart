@@ -20,12 +20,12 @@ module.exports = {
     ],
 
     [
-      ('@semantic-release/git',
+      '@semantic-release/git',
       {
         assets: ['package.json', 'package-lock.json'],
         message:
           '🔖 Release ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}'
-      })
+      }
     ]
   ]
 }
