@@ -22,6 +22,12 @@ module.exports = {
     }
   },
 
+  configureWebpack: {
+    devServer: {
+      allowedHosts: ['localhost', 'wsl.local']
+    }
+  },
+
   chainWebpack: config => {
     const svgRule = config.module.rule('svg')
     svgRule.uses.clear()
