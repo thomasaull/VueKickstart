@@ -13,6 +13,8 @@ module.exports = {
       ],
       preset: 'suit',
       ignoreSelectors: [
+        /^#{\$block}/,
+        /^iframe$/,
         /^svg$/,
         /router-link-active$/,
         /router-link-exact-active$/,
