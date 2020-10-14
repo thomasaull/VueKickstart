@@ -1,4 +1,5 @@
 // This file is only used if you run vue and not nuxt!
+import '@/sharedMain'
 import Vue from 'vue'
 import App from '@/AppVue.vue'
 import { createRouter } from '@/router'

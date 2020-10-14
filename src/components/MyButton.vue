@@ -1,12 +1,12 @@
 <template>
-  <button class="button is-primary" @click="onClick">
+  <button class="MyButton is-primary" @click="onClick">
     <slot></slot>
   </button>
 </template>
 
 <script>
 export default {
-  name: 'my-button',
+  name: 'MyButton',
 
   methods: {
     onClick() {
@@ -16,11 +16,13 @@ export default {
 }
 </script>
 
-<style scoped>
-button {
+<style lang="scss">
+.MyButton {
+  $block: &;
+
   border: 1px solid #eee;
   border-radius: 3px;
-  background-color: #ffffff;
+  background-color: #fff;
   cursor: pointer;
   font-size: 15pt;
   padding: 3px 10px;
