@@ -1,19 +1,22 @@
+import Vue from 'vue'
+import Vuex from 'vuex'
 import forEach from 'lodash/forEach'
 
-export const state = () => ({
-  touchInterface: false
+Vue.use(Vuex)
+
+export default new Vuex.Store({
+  state: {
+    touchInterface: false
+  },
+
+  mutations: {
+    set(state, data) {
+      forEach(data, (value, key) => {
+        state[key] = value
+      })
+    }
+  },
+
+  actions: {},
+  modules: {}
 })
-
-export const mutations = {
-  set(state, data) {
-    forEach(data, (value, key) => {
-      state[key] = value
-    })
-  }
-}
-
-export const getters = {}
-
-export const actions = {}
-
-export const modules = {}

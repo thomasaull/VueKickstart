@@ -3,7 +3,7 @@ import '@/sharedMain'
 import Vue from 'vue'
 import App from '@/AppVue.vue'
 import { createRouter } from '@/router'
-import { state, mutations, getters, actions, modules } from '@/store'
+import store from '@/store'
 import axios from 'axios'
 import Vuex from 'vuex'
 import PortalVue from 'portal-vue'
@@ -65,9 +65,6 @@ Vue.prototype.$constants = constants
 
 // Setup Axios
 axios.defaults.baseURL = process.env.VUE_APP_API_URL
-
-// Setup Store
-const store = new Vuex.Store({ state, mutations, getters, actions, modules })
 
 // Setup Router
 const router = createRouter()
