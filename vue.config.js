@@ -1,11 +1,13 @@
+const path = require('path')
 const svgoPlugins = require('./config/svgoPlugins')
-const scssResources = require('./config/scssResources')
 
+// TODO
+// const scssResources = require('./config/scssResources')
 // transform scssResources Array to String
-let scssString = ''
-scssResources.forEach(scss => {
-  scssString += `@import "${scss}";`
-})
+// let scssString = ''
+// scssResources.forEach(scss => {
+//   scssString += `@import "${scss}";`
+// })
 
 module.exports = {
   pluginOptions: {
@@ -16,8 +18,18 @@ module.exports = {
   css: {
     sourceMap: true,
     loaderOptions: {
-      sass: {
-        data: scssString
+      scss: {
+        prependData: `
+          @use '@/assets/scss/colors' as color;
+          @use '@/assets/scss/typography' as typography;
+          @use '@/assets/scss/constants' as constant;
+          @use '@/assets/scss/mixins' as mixin;
+          @use '@/assets/scss/functions' as function;
+          @use '@/assets/scss/cssVar' as cssVar;
+        `,
+        sassOptions: {
+          includePaths: [path.resolve(__dirname, 'src/assets/scss/')]
+        }
       }
     }
   },
