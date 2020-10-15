@@ -1,0 +1,34 @@
+$white: #fff;
+$black: #000;
+$grey-100: hsl(0, 0, 97);
+$grey-200: hsl(0, 0, 92);
+$grey-300: hsl(0, 0, 85);
+$grey-400: hsl(0, 0, 60);
+$grey-500: hsl(0, 0, 50);
+$grey-600: hsl(0, 0, 40);
+$grey-700: hsl(0, 0, 30);
+$grey-800: hsl(0, 0, 20);
+$grey-900: hsl(0, 0, 10);
+
+$key: red;
+
+$text: $grey-900;
+
+$background-light: $grey-100;
+
+$border-grey: $grey-500;
+
+/* stylelint-disable */
+// Export SCSS Vars for JS
+// Import via import colors from '@/assets/scss/colors.scss'
+// :export {
+//   gray-100: $gray-100;
+//   gray-200: $gray-200;
+//   gray-300: $gray-300;
+//   gray-400: $gray-400;
+//   gray-500: $gray-500;
+//   gray-600: $gray-600;
+//   gray-700: $gray-700;
+//   gray-800: $gray-800;
+//   gray-900: $gray-900;
+// }

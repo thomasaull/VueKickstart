@@ -1,21 +1,22 @@
 // Linear Gradients, Source: https://www.npmjs.com/package/postcss-easing-gradients
-// background: linear-gradient(90deg, rgba($colorBackground-grey, 1), ease, rgba($colorBackground-grey, 0));
+// background: linear-gradient(90deg, rgba(color.$grey-500, 1), ease, rgba(color.$grey-500, 0));
 
 // Interpolate Mixing
-// @include interpolate(font-size padding, 500px, 1200px, 26px, 44px);
+// @include mixin.interpolate(font-size padding, 500px, 1200px, 26px, 44px);
 
 :root {
-  @include interpolate(
-    --fontSize-default,
-    $contentMinWidth,
-    $contentMaxWidth,
-    14.5px,
-    16px
-  );
-
+  --fontStack-default: #{constant.$fontStack-default};
+  --fontSize-default: 16px;
   --fontSize-large: 20px;
   --lineHeight-default: 1.4;
-  --color-key: #{$color-key};
+
+  @include mixin.interpolate(
+    --space-smallest,
+    constant.$contentMinWidth,
+    constant.$contentMaxWidth,
+    10px,
+    20px
+  );
 
   // Media Queries für responsive Anpassung hier
 }
@@ -23,6 +24,11 @@
 html,
 body {
   height: 100%;
+}
+
+html {
+  // Smooth scrolling to #links
+  scroll-behavior: smooth;
 }
 
 body {
@@ -43,20 +49,12 @@ body {
   -webkit-text-size-adjust: none;
 
   /* Adds a hyphen where the word breaks, if supported (No Blink) */
-  @include media('<=600px') {
+  @include mixin.media('<=600px') {
     /* Adds a hyphen where the word breaks, if supported (No Blink) */
     hyphens: auto;
   }
 
-  // Using CSS Variables to avoid Flash of Invisible Text
-  font: var(--fontSize-default) / var(--lineHeight-default) $fontStack-system; // Fallback
-  font-display: swap;
-
-  --fontStack-default: #{$fontStack-system};
-
-  &.-fontsLoaded {
-    font-family: $fontStack-default;
-
-    --fontStack-default: #{$fontStack-default};
-  }
+  font-family: var(--fontStack-default);
+  font-size: var(--fontSize-default);
+  line-height: var(--lineHeight-default);
 }

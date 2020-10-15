@@ -1,0 +1,12 @@
+@use '@/assets/scss/functions' as function;
+
+@mixin define($block, $name, $property: unset) {
+  $blockName: function.getblockname($block);
+
+  --#{$blockName}-#{$name}: #{$property};
+}
+
+@function use($block, $name) {
+  $blockName: function.getblockname($block);
+  @return var(--#{$blockName}-#{$name});
+}

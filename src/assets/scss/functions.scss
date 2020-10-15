@@ -1,0 +1,5 @@
+@use 'sass:string';
+
+@function getBlockName($block) {
+  @return string.slice(#{$block}, 2);
+}

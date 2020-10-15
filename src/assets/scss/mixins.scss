@@ -1,3 +1,18 @@
+// @use "sass:string";
+@use '@/assets/scss/colors' as color;
+@use '@/assets/scss/constants' as constant;
+
+@forward '@/assets/scss/interpolate';
+
+@forward '~@/../node_modules/include-media/dist/_include-media.scss' with (
+  $breakpoints: (
+    mobile: 700px
+  )
+);
+
+// This does not work with the sass @use/@forward syntax:
+// $breakpoints: map-merge($breakpoints, (tablet: 768px)); // to extend array use map-merge
+
 @mixin svgIcon {
   width: 100%;
   height: 100%;
@@ -17,12 +32,40 @@
   }
 }
 
-@mixin transition-hover {
-  transition: all 0.2s;
-  transition-property: color;
+// USAGE:
+// Default (all properties): @include transition-hover;
+// Specific properties: @include transition-hover((transform, opacity));
+// Nested single: @include transition-hover(null, '.ParentClass');
+// Nested multiple: @include transition-hover(null, ($block, '.ParentClass'));
+// Alternatively you can use named parameters, for example:
+// @include transition-hover($properties: all, $rootElements: ($block, '.ParentClass'));
+@mixin transition-hover($properties: null, $rootElements: null) {
+  transition: all constant.$duration-hover--out;
 
+  @if $properties {
+    transition-property: $properties;
+  }
+
+  // Default :hover
   &:hover {
-    transition-duration: 0.1s;
+    transition: all constant.$duration-hover--in;
+
+    @if $properties {
+      transition-property: $properties;
+    }
+  }
+
+  // Additional :hover on rootElements
+  @if $rootElements {
+    @each $rootElement in $rootElements {
+      #{$rootElement}:hover & {
+        transition: all constant.$duration-hover--in;
+
+        @if $properties {
+          transition-property: $properties;
+        }
+      }
+    }
   }
 }
 
@@ -34,8 +77,8 @@
 }
 
 @mixin containerWrap {
-  padding-left: var(--spaceSmallest);
-  padding-right: var(--spaceSmallest);
+  padding-left: var(--space-smallest);
+  padding-right: var(--space-smallest);
 }
 
 @mixin fullWidth {
@@ -81,18 +124,39 @@
   }
 }
 
+@mixin visuallyHidden {
+  position: absolute;
+  top: auto;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  width: 1px;
+  height: 1px;
+  white-space: nowrap;
+}
+
+@mixin hiddenWithoutJs {
+  html.is-noJs & {
+    display: none !important;
+  }
+}
+
 // Usage:
 // @include font-face("Meta", "/fonts/MetaPro-Normal");
 // @include font-face("Meta", "/fonts/MetaPro-Bold", bold);
 @mixin font-face($name, $file, $weight: null, $style: null) {
   @font-face {
     font-family: $name;
-    src: url($file+'.woff2') format('woff2'), url($file+'.woff') format('woff');
+
+    // Legacy:
     // src: url($file+'.eot');
     // src: url($file+'.eot?#iefix') format('embedded-opentype'),
     //   url($file+'.woff2') format('woff2'), url($file+'.woff') format('woff'),
     //   url($file+'.ttf') format('truetype');
+
+    //Modern:
+    src: url($file+'.woff2') format('woff2'), url($file+'.woff') format('woff');
     font-weight: $weight;
     font-style: $style;
+    font-display: swap;
   }
 }
