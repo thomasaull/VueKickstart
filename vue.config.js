@@ -1,5 +1,6 @@
 const path = require('path')
 const svgoPlugins = require('./config/svgoPlugins')
+const StyleLintPlugin = require('stylelint-webpack-plugin')
 
 // TODO
 // const scssResources = require('./config/scssResources')
@@ -10,11 +11,6 @@ const svgoPlugins = require('./config/svgoPlugins')
 // })
 
 module.exports = {
-  pluginOptions: {
-    lintStyleOnBuild: true,
-    stylelint: {}
-  },
-
   css: {
     sourceMap: true,
     loaderOptions: {
@@ -37,7 +33,13 @@ module.exports = {
   configureWebpack: {
     devServer: {
       allowedHosts: ['localhost', 'wsl.local']
-    }
+    },
+
+    plugins: [
+      new StyleLintPlugin({
+        files: ['**/*.{vue,htm,html,css,sss,less,scss}']
+      })
+    ]
   },
 
   chainWebpack: config => {
