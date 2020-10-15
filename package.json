@@ -3,6 +3,7 @@
   "version": "1.1.0",
   "private": true,
   "scripts": {
+    "release": "semantic-release --no-ci",
     "lint": "vue-cli-service lint",
     "lint:style": "stylelint **/*.{vue,htm,html,css,sss,less,scss} --fix",
     "nuxt:build": "nuxt build",
