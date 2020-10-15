@@ -6,12 +6,6 @@
 export default {
   name: 'Icon',
 
-  data() {
-    return {
-      svg: undefined
-    }
-  },
-
   props: {
     name: {
       type: String,
@@ -19,10 +13,16 @@ export default {
     }
   },
 
+  data() {
+    return {
+      svg: undefined
+    }
+  },
+
   async created() {
-    const loaded = await import(/* webpackMode: "eager" */ `@/assets/svg/${
-      this.name
-    }.svg`)
+    const loaded = await import(
+      /* webpackMode: "eager" */ `@/assets/svg/${this.name}.svg`
+    )
     this.svg = loaded.default
   }
 }

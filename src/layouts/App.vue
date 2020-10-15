@@ -7,9 +7,9 @@
     </template>
 
     <ErrorModal
-      @close="$store.commit('error/markAsRead', latestUnreadError.id)"
       v-if="latestUnreadError"
       :error="latestUnreadError"
+      @close="$store.commit('error/markAsRead', latestUnreadError.id)"
     />
   </div>
 </template>
@@ -24,12 +24,6 @@ import NakedLayout from '@/layouts/NakedLayout'
 export default {
   name: 'App',
   components: { DefaultLayout, NakedLayout }, // eslint-disable-line
-
-  head() {
-    return {
-      title: this.$route.meta.title
-    }
-  },
 
   computed: {
     ...mapGetters('error', { latestUnreadError: 'latestUnread' }),
@@ -71,6 +65,12 @@ export default {
       this.$store.commit('set', { touchInterface: true })
     }
   }
+
+  // head() {
+  //   return {
+  //     title: this.$route.meta.title
+  //   }
+  // }
 }
 </script>
 

@@ -91,7 +91,7 @@
       "git add"
     ],
     "*.{vue,htm,html,css,sss,less,scss}": [
-      "vue-cli-service lint:style",
+      "npm run lint:style",
       "git add"
     ]
   }
