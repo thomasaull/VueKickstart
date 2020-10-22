@@ -7,7 +7,11 @@ export default {
       let response = ''
 
       forEach(urls, url => {
-        response += `${url.url} ${url.width}w ${url.height}h,`
+        let imageString = `${url.url} ${url.width}w`
+        if (url.height) imageString += ` ${url.height}h`
+        imageString += ','
+
+        response += imageString
       })
 
       response = trimEnd(response, ',')
