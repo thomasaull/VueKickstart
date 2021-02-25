@@ -35,8 +35,8 @@ body {
   min-height: 100%;
   min-width: 100%;
   overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  // -webkit-font-smoothing: antialiased;
+  // -moz-osx-font-smoothing: grayscale;
   // -webkit-text-stroke: 0.2px rgba(0,0,0, 0.5) // wenn Text in Webkit zu dünn
   // text-shadow: #fff 0px 1px 1px; // Wenn Text in allen Browsern zu dünn
 
@@ -44,6 +44,9 @@ body {
   // These are technically the same, but use both
   overflow-wrap: break-word;
   word-wrap: break-word;
+
+  // prevent jumps by always showing the scrollbar
+  overflow-y: scroll;
 
   // Prevent iOS to enlarge font-size
   -webkit-text-size-adjust: none;

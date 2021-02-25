@@ -1,5 +1,15 @@
-// Mixins for headlines, text styles etc…
+@use '@/assets/scss/constants' as constant;
 
-@mixin h1 {
-  font-weight: bold;
+@mixin h1($includeMargin: true) {
+  @include mixin.interpolate(
+    font-size,
+    constant.$viewportMinWidth,
+    constant.$viewportMaxWidth,
+    40px,
+    54px
+  );
+
+  @if ($includeMargin) {
+    margin-bottom: 0.6em;
+  }
 }

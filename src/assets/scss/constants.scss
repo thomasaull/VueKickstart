@@ -5,6 +5,7 @@ $contentMaxWidth: 1200px;
 
 // Naming Conventions of variables is similar to BEM, but camelCase instead of PascalCase:
 // $block-element--modifier
+// Example: $borderRadius-forCircle--hover: 5px;
 
 // Typography:
 $fontStack-system: -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto',
@@ -12,11 +13,6 @@ $fontStack-system: -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto',
   sans-serif;
 
 $fontStack-default: 'Helvetica', $fontStack-system;
-
-$duration-hover--out: 0.3s;
-$duration-hover--in: 0.1s;
-
-$borderWidth-default: 2px;
 
 // Based on: https://medium.com/@Florian/freebie-google-material-design-shadow-helper-2a0501295a2d
 // Also nice shadows: https://brumm.af/shadows
@@ -26,18 +22,11 @@ $shadow-level3: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 $shadow-level4: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 $shadow-level5: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 
-$filterShadow-level2: drop-shadow(0 4px 2px rgba(0, 0, 0, 0.16))
-  drop-shadow(0 4px 2px rgba(0, 0, 0, 0.23));
+// For drop shadow filter, divide the blur radius by 2
+// box-shadow: 0 0 20px rgba(#000, 0.1)
+// filter: drop-shadow(0 0 (20px / 2) rgba(#000, 0.1)
 
-// $modularscale: (
-//   base: 16px,
-//   ratio: $major-second,
-//   $contentMinWidth: (
-//     base: 20px,
-//     ratio: $major-second
-//   ),
-//   $contentMaxWidth: (
-//     base: 18px,
-//     ratio: $major-third
-//   )
-// );
+$duration--hoverIn: 0.05s;
+$duration--hoverOut: 0.3s;
+$duration--fast: 0.1s;
+$duration--default: 0.2s;

@@ -22,7 +22,7 @@
   overflow: visible;
   display: block;
 
-  & [id*='.fill'] {
+  [id*='.fill'] {
     fill: currentColor;
     stroke: none;
   }
@@ -34,24 +34,39 @@
 
 // USAGE:
 // Default (all properties): @include transition-hover;
-// Specific properties: @include transition-hover((transform, opacity));
+// Specific properties: @include transition-hover(transform opacity);
 // Nested single: @include transition-hover(null, '.ParentClass');
 // Nested multiple: @include transition-hover(null, ($block, '.ParentClass'));
 // Alternatively you can use named parameters, for example:
 // @include transition-hover($properties: all, $rootElements: ($block, '.ParentClass'));
-@mixin transition-hover($properties: null, $rootElements: null) {
-  transition: all constant.$duration-hover--out;
+// Use States
+// @include transition-hover(null, null, ('highlighted')
+@mixin transition-hover($properties: null, $rootElements: null, $states: null) {
+  transition: all constant.$duration--hoverOut;
 
   @if $properties {
     transition-property: $properties;
   }
 
-  // Default :hover
+  // Default :hover'
   &:hover {
-    transition: all constant.$duration-hover--in;
-
+    transition: all constant.$duration--hoverIn;
     @if $properties {
       transition-property: $properties;
+    }
+  }
+
+  // Transition on states
+  @if $states {
+    @each $state in $states {
+      $stateClass: '.is-#{$state}';
+
+      &#{$stateClass} {
+        transition: all constant.$duration--hoverIn;
+        @if $properties {
+          transition-property: $properties;
+        }
+      }
     }
   }
 
@@ -59,10 +74,23 @@
   @if $rootElements {
     @each $rootElement in $rootElements {
       #{$rootElement}:hover & {
-        transition: all constant.$duration-hover--in;
-
+        transition: all constant.$duration--hoverIn;
         @if $properties {
           transition-property: $properties;
+        }
+      }
+
+      // States on additional rootElements
+      @if $states {
+        @each $state in $states {
+          $stateClass: '.is-#{$state}';
+
+          #{$rootElement}#{$stateClass} & {
+            transition: all constant.$duration--hoverIn;
+            @if $properties {
+              transition-property: $properties;
+            }
+          }
         }
       }
     }
@@ -137,6 +165,19 @@
 @mixin hiddenWithoutJs {
   html.is-noJs & {
     display: none !important;
+  }
+}
+
+@mixin truncateText($lines: 0) {
+  overflow: hidden;
+
+  @if $lines >= 2 {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+  } @else {
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }
 

@@ -78,7 +78,6 @@ export default {
 /* stylelint-disable */
 @import '@/assets/scss/default.scss';
 @import '@/assets/scss/reset.scss';
-@import '@/assets/scss/defaultText.scss';
 
 // @include font-face('PxGrotesk', '/fonts/PxGrotesk-Regular');
 

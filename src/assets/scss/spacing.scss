@@ -1,0 +1,9 @@
+:root {
+  @include mixin.interpolate(
+    --space-smallest,
+    constant.$contentMinWidth,
+    constant.$contentMaxWidth,
+    10px,
+    20px
+  );
+}
