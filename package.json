@@ -22,7 +22,7 @@
     "@sentry/integrations": "^5.26.0",
     "@xstate/inspect": "^0.4.1",
     "apollo-link-batch-http": "^1.2.14",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "cuid": "^2.1.8",
     "gsap": "^3.5.1",
