@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import FontFaceObserver from 'fontfaceobserver'
 import DefaultLayout from '@/layouts/DefaultLayout'
 import NakedLayout from '@/layouts/NakedLayout'
 
@@ -18,15 +17,6 @@ export default {
       if (this.$route.meta.layout) return `${this.$route.meta.layout}Layout`
       return 'DefaultLayout'
     }
-  },
-
-  created() {
-    // observe loaded fonts
-    let font = new FontFaceObserver('Fontname')
-
-    font.load().then(() => {
-      document.querySelector('body').classList.add('-fontsLoaded')
-    })
   }
 }
 </script>
