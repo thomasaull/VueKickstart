@@ -18,19 +18,19 @@
 import { mapGetters } from 'vuex'
 import has from 'lodash/has'
 import FontFaceObserver from 'fontfaceobserver'
-import DefaultLayout from '@/layouts/DefaultLayout'
-import NakedLayout from '@/layouts/NakedLayout'
+import LayoutDefault from '@/layouts/LayoutDefault'
+import LayoutNaked from '@/layouts/LayoutNaked'
 
 export default {
   name: 'App',
-  components: { DefaultLayout, NakedLayout }, // eslint-disable-line
+  components: { LayoutDefault, LayoutNaked }, // eslint-disable-line
 
   computed: {
     ...mapGetters('error', { latestUnreadError: 'latestUnread' }),
 
     layout() {
       if (this.$route.meta.layout) return `${this.$route.meta.layout}Layout`
-      return 'DefaultLayout'
+      return 'LayoutDefault'
     },
 
     routerKey() {
