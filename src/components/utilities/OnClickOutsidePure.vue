@@ -3,7 +3,7 @@ export default {
   name: 'OnClickOutsidePure',
 
   props: {
-    do: { type: Function, required: true }
+    do: { type: Function, required: true },
   },
 
   mounted() {
@@ -23,11 +23,11 @@ export default {
       if (this.$el.contains(event.target)) return
 
       this.do()
-    }
+    },
   },
 
   render() {
     return this.$slots.default[0]
-  }
+  },
 }
 </script>

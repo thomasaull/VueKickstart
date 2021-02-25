@@ -38,7 +38,7 @@ module.exports = {
   modules: ['@nuxtjs/style-resources', '@/modules/routes'],
 
   styleResources: {
-    scss: scssResources
+    scss: scssResources,
   },
 
   css: ['reset-css/reset.css'],
@@ -47,7 +47,7 @@ module.exports = {
     '@/plugins/all',
     { src: '@/plugins/frontend', ssr: false },
     { src: '@/plugins/route' },
-    { src: '@/plugins/foo' }
+    { src: '@/plugins/foo' },
   ],
 
   generate: {
@@ -57,13 +57,13 @@ module.exports = {
       const { data: routes } = await axios.get('prerender-routes')
 
       return routes
-    }
+    },
   },
 
   loading: false,
 
   server: {
-    port: 8080
+    port: 8080,
   },
 
   env: environmentVariablesForClient,
@@ -78,24 +78,24 @@ module.exports = {
         config.devtool = '#source-map'
       }
 
-      const svgRule = config.module.rules.find(rule => rule.test.test('.svg'))
+      const svgRule = config.module.rules.find((rule) => rule.test.test('.svg'))
       svgRule.test = /\.(png|jpe?g|gif|webp)$/
       config.module.rules.push({
         test: /\.svg$/,
         loader: 'vue-svg-loader',
         options: {
           svgo: {
-            plugins: svgoPlugins
-          }
-        }
+            plugins: svgoPlugins,
+          },
+        },
       })
 
       return config
-    }
+    },
   },
 
   head: {
-    titleTemplate: titleChunk => {
+    titleTemplate: (titleChunk) => {
       return titleChunk
         ? `${titleChunk} - ${process.env.VUE_APP_TITLE}`
         : process.env.VUE_APP_TITLE
@@ -105,31 +105,31 @@ module.exports = {
       { charset: 'utf-8' },
       {
         name: 'viewport',
-        content: 'width=device-width, initial-scale=1, user-scalable=no'
+        content: 'width=device-width, initial-scale=1, user-scalable=no',
       },
       { name: 'msapplication-TileColor', content: '#ffffff' },
-      { name: 'theme-color', content: '#ffffff' }
+      { name: 'theme-color', content: '#ffffff' },
     ],
     link: [
       {
         rel: 'apple-touch-icon',
         sizes: '180x180',
-        href: '/apple-touch-icon.png'
+        href: '/apple-touch-icon.png',
       },
       {
         rel: 'icon',
         type: 'image/png',
         sizes: '32x32',
-        href: '/favicon-32x32.png'
+        href: '/favicon-32x32.png',
       },
       {
         rel: 'icon',
         type: 'image/png',
         sizes: '16x16',
-        href: '/favicon-16x16.png'
+        href: '/favicon-16x16.png',
       },
       { rel: 'manifest', href: '/site.webmanifest' },
-      { rel: 'mask-icon', href: '/safari-pinned-tab.svg', color: '#757575' }
-    ]
-  }
+      { rel: 'mask-icon', href: '/safari-pinned-tab.svg', color: '#757575' },
+    ],
+  },
 }

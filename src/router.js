@@ -23,9 +23,9 @@ export const router = new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
-    }
-  ]
+      component: Home,
+    },
+  ],
 })
 
 // TODO: This should be done differently

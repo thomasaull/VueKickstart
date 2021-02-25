@@ -22,16 +22,16 @@ export default {
   name: 'App',
   components: {
     LayoutDefault,
-    LayoutNaked
+    LayoutNaked,
   },
 
   props: {
-    isStorybook: { type: Boolean, default: false }
+    isStorybook: { type: Boolean, default: false },
   },
 
   data() {
     return {
-      layout: undefined
+      layout: undefined,
     }
   },
 
@@ -42,7 +42,7 @@ export default {
       }
 
       return LAYOUT.NAKED
-    }
+    },
   },
 
   created() {
@@ -52,8 +52,8 @@ export default {
   methods: {
     updateLayout(layout) {
       this.layout = layout
-    }
-  }
+    },
+  },
 }
 </script>
 

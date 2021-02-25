@@ -1,4 +1,4 @@
 export const LAYOUT = {
   DEFAULT: 'LayoutDefault',
-  NAKED: 'LayoutNaked'
+  NAKED: 'LayoutNaked',
 }

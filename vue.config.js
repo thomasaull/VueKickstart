@@ -24,25 +24,25 @@ module.exports = {
           @use '@/assets/scss/cssVar' as cssVar;
         `,
         sassOptions: {
-          includePaths: [path.resolve(__dirname, 'src/assets/scss/')]
-        }
-      }
-    }
+          includePaths: [path.resolve(__dirname, 'src/assets/scss/')],
+        },
+      },
+    },
   },
 
   configureWebpack: {
     devServer: {
-      allowedHosts: ['localhost', 'wsl.local']
+      allowedHosts: ['localhost', 'wsl.local'],
     },
 
     plugins: [
       new StyleLintPlugin({
-        files: ['**/*.{vue,htm,html,css,sss,less,scss}']
-      })
-    ]
+        files: ['**/*.{vue,htm,html,css,sss,less,scss}'],
+      }),
+    ],
   },
 
-  chainWebpack: config => {
+  chainWebpack: (config) => {
     const svgRule = config.module.rule('svg')
     svgRule.uses.clear()
     svgRule
@@ -53,8 +53,8 @@ module.exports = {
       .loader('vue-svg-loader')
       .options({
         svgo: {
-          plugins: svgoPlugins
-        }
+          plugins: svgoPlugins,
+        },
       })
       .end()
 
@@ -62,5 +62,5 @@ module.exports = {
     if (process.env.NODE_ENV === 'development') {
       config.output.filename('[name].[hash].js').end()
     }
-  }
+  },
 }

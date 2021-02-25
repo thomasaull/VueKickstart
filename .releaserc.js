@@ -7,16 +7,16 @@ module.exports = {
         releaseRules: {
           major: [':boom:'],
           minor: [':sparkles:'],
-          patch: [':bug:', ':ambulance:', ':lock:']
-        }
-      }
+          patch: [':bug:', ':ambulance:', ':lock:'],
+        },
+      },
     ],
 
     [
       '@semantic-release/npm',
       {
-        npmPublish: false
-      }
+        npmPublish: false,
+      },
     ],
 
     [
@@ -24,8 +24,8 @@ module.exports = {
       {
         assets: ['package.json', 'package-lock.json'],
         message:
-          '🔖 Release ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}'
-      }
-    ]
-  ]
+          '🔖 Release ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
+      },
+    ],
+  ],
 }

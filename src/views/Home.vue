@@ -13,8 +13,8 @@ export default {
 
   data() {
     return {
-      useLayout: LAYOUT.DEFAULT
+      useLayout: LAYOUT.DEFAULT,
     }
-  }
+  },
 }
 </script>

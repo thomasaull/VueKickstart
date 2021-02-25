@@ -8,7 +8,7 @@ import cuid from 'cuid'
 import * as Sentry from '@sentry/browser'
 
 const state = {
-  errors: []
+  errors: [],
 }
 
 const mutations = {
@@ -24,14 +24,14 @@ const mutations = {
     } catch (error) {
       console.error('error/markAsRead: Error')
     }
-  }
+  },
 }
 
 const getters = {
   unread(state) {
     const unreadErrors = filter(state.errors, { read: false, critical: true })
 
-    forEach(state.errors, error => {
+    forEach(state.errors, (error) => {
       console.log(error.message, error.read)
     })
 
@@ -40,13 +40,13 @@ const getters = {
 
   latestUnread(state, getters) {
     if (getters.unread.length) return getters.unread[getters.unread.length - 1]
-  }
+  },
 }
 
 const actions = {
   handle({ dispatch }, { error, silent = false, critical = false } = {}) {
     if (has(error, 'graphQLErrors')) {
-      forEach(error.graphQLErrors, error => {
+      forEach(error.graphQLErrors, (error) => {
         error.silent = silent
         error.critical = critical
         dispatch('add', error)
@@ -74,7 +74,7 @@ const actions = {
       id: cuid.slug(),
       report: error.report,
       critical: error.critical,
-      silent: error.silent
+      silent: error.silent,
     }
 
     // maybe send error to sentry:
@@ -91,7 +91,7 @@ const actions = {
     }
 
     commit('add', error)
-  }
+  },
 }
 
 export default {
@@ -99,5 +99,5 @@ export default {
   state,
   getters,
   mutations,
-  actions
+  actions,
 }

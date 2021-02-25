@@ -7,12 +7,12 @@ export default {
       ValidForm(form, {
         invalidClass: 'is-danger',
         errorPlacement: 'after',
-        validationErrorClass: 'Input-error'
+        validationErrorClass: 'Input-error',
       })
     },
 
     form_hasErrors(form) {
-      const error = find(form.querySelectorAll('input'), input => {
+      const error = find(form.querySelectorAll('input'), (input) => {
         return input.validity.valid !== true
       })
 
@@ -23,6 +23,6 @@ export default {
 
       // console.log('no errors')
       return false
-    }
-  }
+    },
+  },
 }

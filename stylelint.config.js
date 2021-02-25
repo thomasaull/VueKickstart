@@ -9,7 +9,7 @@ module.exports = {
       implicitComponents: [
         '**/src/components/**/*',
         '**/src/views/**/*',
-        '**/src/layouts/**/*'
+        '**/src/layouts/**/*',
       ],
       preset: 'suit',
       ignoreSelectors: [
@@ -26,8 +26,8 @@ module.exports = {
         /v-enter-active$/,
         /v-leave$/,
         /v-leave-to$/,
-        /v-leave-active$/
-      ]
-    }
-  }
+        /v-leave-active$/,
+      ],
+    },
+  },
 }

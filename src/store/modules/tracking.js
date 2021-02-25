@@ -4,7 +4,7 @@ import Vue from 'vue'
 const state = {
   enabled: process.env.NODE_ENV === 'production',
   trackingEnabled: process.env.NODE_ENV === 'production',
-  breadcrumbsEnabled: process.env.NODE_ENV === 'production'
+  breadcrumbsEnabled: process.env.NODE_ENV === 'production',
 }
 
 const mutations = {
@@ -26,7 +26,7 @@ const mutations = {
       Sentry.addBreadcrumb({
         category: category,
         message: `${action}: ${name}`,
-        level: 'info'
+        level: 'info',
       })
     }
   },
@@ -48,7 +48,7 @@ const mutations = {
         throw new Error('Vue.prototype.$matomo not initialized')
       }
     }
-  }
+  },
 }
 const getters = {}
 
@@ -59,5 +59,5 @@ export default {
   state,
   getters,
   mutations,
-  actions
+  actions,
 }

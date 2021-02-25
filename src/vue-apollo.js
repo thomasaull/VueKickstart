@@ -4,7 +4,7 @@ import store from '@/store'
 import forEach from 'lodash/forEach'
 import has from 'lodash/has'
 import {
-  createApolloClient
+  createApolloClient,
   // restartWebsockets
 } from 'vue-cli-plugin-apollo/graphql-client'
 
@@ -36,7 +36,7 @@ Vue.prototype.$filesRoot = filesRoot
 // })
 
 const batchHttpLink = new BatchHttpLink({
-  uri: GRAPHQL_URL
+  uri: GRAPHQL_URL,
 })
 
 const link = ApolloLink.from([batchHttpLink])
@@ -70,7 +70,7 @@ const defaultOptions = {
   // getAuth: (tokenName) => ...
   getAuth: () => {
     return `Bearer ${store.state.auth.token}`
-  }
+  },
 
   // Additional ApolloClient options
   // apollo: { ... }
@@ -84,7 +84,7 @@ function createProvider(options = {}) {
   // Create apollo client
   const { apolloClient, wsClient } = createApolloClient({
     ...defaultOptions,
-    ...options
+    ...options,
   })
   apolloClient.wsClient = wsClient
 
@@ -94,10 +94,10 @@ function createProvider(options = {}) {
     defaultOptions: {
       $query: {
         // fetchPolicy: 'cache-and-network',
-      }
+      },
     },
     errorHandler(error) {
-      forEach(error.graphQLErrors, error => {
+      forEach(error.graphQLErrors, (error) => {
         if (!has(error, 'extensions.key'))
           error.extensions = { ...error.extensions, key: 'query.error' }
       })
@@ -110,7 +110,7 @@ function createProvider(options = {}) {
         'background: red; color: white; padding: 2px 4px; border-radius: 3px; font-weight: bold;',
         error.message
       )
-    }
+    },
   })
 
   return apolloProvider

@@ -10,8 +10,8 @@ import { UseXStatePureState } from '@/components/UseXState/UseXStatePureState'
 
 export const propTypes = {
   state: {
-    allowed: extractAllStates(UseXStatePureState)
-  }
+    allowed: extractAllStates(UseXStatePureState),
+  },
 }
 
 export default {
@@ -22,27 +22,27 @@ export default {
     state: {
       type: String,
       default: undefined,
-      validator: value => propValidator.oneOf(value, propTypes.state.allowed)
-    }
+      validator: (value) => propValidator.oneOf(value, propTypes.state.allowed),
+    },
   },
 
   data() {
     return {
-      xstate: undefined
+      xstate: undefined,
     }
   },
 
   watch: {
     state() {
       this.xstate.restartWith(this.state)
-    }
+    },
   },
 
   async created() {
     this.xstate = useXState(UseXStatePureState, this, {
-      initialState: this.state
+      initialState: this.state,
     })
-  }
+  },
 }
 </script>
 

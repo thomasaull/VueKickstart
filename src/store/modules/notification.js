@@ -3,7 +3,7 @@ import filter from 'lodash/filter'
 import cuid from 'cuid'
 
 const state = {
-  notifications: []
+  notifications: [],
 }
 
 const mutations = {
@@ -18,13 +18,13 @@ const mutations = {
     } catch (error) {
       console.error('notification/markAsRead: Error')
     }
-  }
+  },
 }
 
 const getters = {
   unread(state) {
     return filter(state.notifications, { read: false })
-  }
+  },
 }
 
 const actions = {
@@ -33,7 +33,7 @@ const actions = {
       type: 'error',
       message: error.message,
       id: cuid.slug(),
-      read: false
+      read: false,
     }
 
     commit('add', notification)
@@ -45,7 +45,7 @@ const actions = {
       type = 'default',
       message = undefined,
       action = undefined,
-      routerLink = undefined
+      routerLink = undefined,
     } = {}
   ) {
     const notification = {
@@ -54,11 +54,11 @@ const actions = {
       action: action,
       routerLink: routerLink,
       id: cuid.slug(),
-      read: false
+      read: false,
     }
 
     commit('add', notification)
-  }
+  },
 }
 
 export default {
@@ -66,5 +66,5 @@ export default {
   state,
   getters,
   mutations,
-  actions
+  actions,
 }

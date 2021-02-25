@@ -7,12 +7,12 @@ export default {
   component: WithStatesPure,
   decorators: [withStates],
   parameters: {
-    additionalStates: ['disabled']
+    additionalStates: ['disabled'],
   },
 
   args: {
-    label: 'The label'
-  }
+    label: 'The label',
+  },
 }
 
 const Template = (args, { argTypes }) => ({
@@ -22,7 +22,7 @@ const Template = (args, { argTypes }) => ({
     <WithStatesPure
       v-bind="$props"
     />
-  `
+  `,
 })
 
 export const Default = Template.bind({})

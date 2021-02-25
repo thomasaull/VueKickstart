@@ -2,9 +2,9 @@
   <div class="App">
     <component :is="layout"><nuxt /></component>
 
-    <template v-slot:notifications>
+    <!-- <template #notifications>
       <Notifications />
-    </template>
+    </template> -->
 
     <ErrorModal
       v-if="latestUnreadError"
@@ -40,7 +40,7 @@ export default {
       }
 
       return String(this.$route.meta.id)
-    }
+    },
   },
 
   created() {
@@ -63,8 +63,8 @@ export default {
   methods: {
     activateTouchInterface() {
       this.$store.commit('set', { touchInterface: true })
-    }
-  }
+    },
+  },
 
   // head() {
   //   return {

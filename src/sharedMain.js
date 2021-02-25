@@ -40,10 +40,10 @@ Vue.prototype.$scss = scssVariables
 // Global persoplan constants
 Vue.prototype.$constants = {
   ...constants,
-  URLS: urls
+  URLS: urls,
 }
 
 export const sharedComponentParts = {
   store,
-  apolloProvider
+  apolloProvider,
 }

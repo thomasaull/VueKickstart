@@ -7,7 +7,7 @@ export default {
   props: {
     href: { type: String },
     to: { type: [String, Object] },
-    linkOpenInNewWindow: { type: Boolean, default: false }
+    linkOpenInNewWindow: { type: Boolean, default: false },
   },
 
   computed: {
@@ -28,18 +28,18 @@ export default {
       if (this.link_tag === 'router-link') {
         return {
           ...baseProps,
-          to: this.to
+          to: this.to,
         }
       }
 
       if (this.link_tag === 'a') {
         return {
           ...baseProps,
-          href: this.href
+          href: this.href,
         }
       }
 
       // if (this.link_tag === 'button') return { type: 'button' }
-    }
-  }
+    },
+  },
 }

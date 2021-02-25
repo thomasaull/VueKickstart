@@ -7,5 +7,5 @@ export function oneOf(value, allowed) {
 }
 
 export default {
-  oneOf
+  oneOf,
 }

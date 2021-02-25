@@ -6,7 +6,7 @@ export default new Vue({
       mouseX: 0,
       mouseY: 0,
       scrollTop: 0,
-      scrollLeft: 0
+      scrollLeft: 0,
     }
   },
 
@@ -28,6 +28,6 @@ export default new Vue({
 
     setScrollLeft() {
       this.scrollLeft = document.scrollingElement.scrollLeft
-    }
-  }
+    },
+  },
 })

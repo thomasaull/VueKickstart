@@ -12,7 +12,7 @@ const AUTH_ROLES = 'blupp-roles'
 
 const state = {
   token: undefined,
-  roles: []
+  roles: [],
 }
 
 const mutations = {
@@ -45,7 +45,7 @@ const mutations = {
     if (typeof localStorage !== 'undefined') {
       localStorage.removeItem(AUTH_TOKEN)
     }
-  }
+  },
 }
 
 const getters = {
@@ -54,9 +54,9 @@ const getters = {
     return false
   },
 
-  hasRole: state => role => {
+  hasRole: (state) => (role) => {
     return includes(state.roles, role)
-  }
+  },
 }
 
 const actions = {
@@ -70,7 +70,7 @@ const actions = {
         {
           error: new Error(
             'Error while resetting apollo cache. Please reload your browser window'
-          )
+          ),
         },
         { root: true }
       )
@@ -87,13 +87,13 @@ const actions = {
 
         variables: {
           email: email,
-          password: password
+          password: password,
         },
 
         update(store, { data }) {
           commit('setToken', data.login.token)
           commit('setRoles', data.login.user.roles)
-        }
+        },
       })
 
       if (resetApolloStore) await dispatch('resetApolloStore')
@@ -128,7 +128,7 @@ const actions = {
 
     try {
       await apolloProvider.defaultClient.mutate({
-        mutation: LogoutMutation
+        mutation: LogoutMutation,
       })
 
       await dispatch('resetApolloStore')
@@ -139,7 +139,7 @@ const actions = {
       commit('resetToken')
       dispatch('wait/end', 'logout', { root: true })
     }
-  }
+  },
 }
 
 export default {
@@ -147,5 +147,5 @@ export default {
   state,
   getters,
   mutations,
-  actions
+  actions,
 }

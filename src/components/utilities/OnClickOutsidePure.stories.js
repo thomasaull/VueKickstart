@@ -6,8 +6,8 @@ export default {
   component: OnClickOutsidePure,
 
   argTypes: {
-    clickOutside: { action: 'clickOutside' }
-  }
+    clickOutside: { action: 'clickOutside' },
+  },
 }
 
 const Template = (args, { argTypes }) => ({
@@ -19,7 +19,7 @@ const Template = (args, { argTypes }) => ({
       v-bind="$props"
       @clickOutside="clickOutside"
     />
-  `
+  `,
 })
 
 export const Default = Template.bind({})

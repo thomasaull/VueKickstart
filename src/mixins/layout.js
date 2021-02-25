@@ -24,6 +24,6 @@ export default {
   methods: {
     layout_do() {
       console.warn(`layout_do() not implemented for ${this.$options.name}`)
-    }
-  }
+    },
+  },
 }

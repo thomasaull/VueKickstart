@@ -11,9 +11,9 @@ export const UseXStatePureState = () => {
       anoterState: {
         initial: 'subState',
         states: {
-          subState: {}
-        }
-      }
-    }
+          subState: {},
+        },
+      },
+    },
   })
 }

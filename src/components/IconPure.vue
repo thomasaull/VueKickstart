@@ -7,12 +7,12 @@ export default {
   name: 'IconPure',
 
   props: {
-    name: { type: String, required: true }
+    name: { type: String, required: true },
   },
 
   data() {
     return {
-      svg: undefined
+      svg: undefined,
     }
   },
 
@@ -21,7 +21,7 @@ export default {
       /* webpackMode: "eager" */ `@/assets/svg/${this.name}.svg`
     )
     this.svg = loaded.default
-  }
+  },
 }
 </script>
 

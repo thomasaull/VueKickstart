@@ -6,7 +6,7 @@ export default {
     lazysizes_getSrcset(urls) {
       let response = ''
 
-      forEach(urls, url => {
+      forEach(urls, (url) => {
         let imageString = `${url.url} ${url.width}w`
         if (url.height) imageString += ` ${url.height}h`
         imageString += ','
@@ -28,6 +28,6 @@ export default {
 
     lazysizes_createTransparentPngPlaceholder() {
       return 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
-    }
-  }
+    },
+  },
 }

@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    touchInterface: false
+    touchInterface: false,
   },
 
   mutations: {
@@ -14,9 +14,9 @@ export default new Vuex.Store({
       forEach(data, (value, key) => {
         state[key] = value
       })
-    }
+    },
   },
 
   actions: {},
-  modules: {}
+  modules: {},
 })

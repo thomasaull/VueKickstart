@@ -1,6 +1,6 @@
 import {
   propTypes,
-  default as UseXStatePure
+  default as UseXStatePure,
 } from '@/components/UseXState/UseXStatePure.vue'
 
 export default {
@@ -9,9 +9,9 @@ export default {
 
   argTypes: {
     state: {
-      control: { type: 'select', options: propTypes.state.allowed }
-    }
-  }
+      control: { type: 'select', options: propTypes.state.allowed },
+    },
+  },
 }
 
 const Template = (args, { argTypes }) => ({
@@ -21,7 +21,7 @@ const Template = (args, { argTypes }) => ({
     <UseXStatePure
       v-bind="$props"
     />
-  `
+  `,
 })
 
 export const Default = Template.bind({})

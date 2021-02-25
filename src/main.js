@@ -12,7 +12,7 @@ if (process.env.NODE_ENV === 'production') {
   // Options: https://docs.sentry.io/error-reporting/configuration/?platform=browsernpm
   Sentry.init({
     dsn: 'replace-with-dsn',
-    integrations: [new Integrations.Vue({ Vue, attachProps: true })]
+    integrations: [new Integrations.Vue({ Vue, attachProps: true })],
   })
 
   // Setup Tracking
@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === 'production') {
     host: '//url-to-matomo.de/',
     siteId: 1,
     // router: router,
-    debug: true
+    debug: true,
   })
 }
 
@@ -40,5 +40,5 @@ if (process.env.NODE_ENV === 'production') {
 new Vue({
   ...sharedComponentParts,
   router,
-  render: h => h(App)
+  render: (h) => h(App),
 }).$mount('#app')

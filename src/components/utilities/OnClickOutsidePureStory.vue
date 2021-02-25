@@ -10,7 +10,7 @@ import OnClickOutsidePure from '@/components/utilities/OnClickOutsidePure.vue'
 export default {
   name: 'OnClickOutsidePureStory',
   components: {
-    OnClickOutsidePure
-  }
+    OnClickOutsidePure,
+  },
 }
 </script>

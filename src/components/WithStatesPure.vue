@@ -10,8 +10,8 @@ export default {
   components: {},
 
   props: {
-    label: { type: String, default: undefined }
-  }
+    label: { type: String, default: undefined },
+  },
 }
 </script>
 

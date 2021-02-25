@@ -7,6 +7,6 @@
 
 <script>
 export default {
-  name: 'LayoutNaked'
+  name: 'LayoutNaked',
 }
 </script>

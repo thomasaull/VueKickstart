@@ -11,7 +11,7 @@ class xState {
       context: {},
       meta: undefined,
       path: undefined,
-      restartWith: this.restartWith.bind(this)
+      restartWith: this.restartWith.bind(this),
     }
 
     this.setup(machine, component, options)
@@ -21,7 +21,7 @@ class xState {
     this.stateMachine = machine(component)
 
     this.state.service = interpret(this.stateMachine, {
-      devTools: process.env.NODE_ENV === 'development'
+      devTools: process.env.NODE_ENV === 'development',
     })
 
     if (options?.inspect && process.env.NODE_ENV === 'development') {
@@ -34,7 +34,7 @@ class xState {
   }
 
   start(options = {}) {
-    this.state.service.onTransition(newState => {
+    this.state.service.onTransition((newState) => {
       this.state.current = newState
       this.state.context = newState.context ? newState.context : {}
 
@@ -84,7 +84,7 @@ export function extractAllStates(stateMachine) {
   const machine = stateMachine()
 
   // Filter out root state
-  const filteredStates = machine.stateIds.filter(state => {
+  const filteredStates = machine.stateIds.filter((state) => {
     const splitted = state.split('.')
 
     if (splitted.length === 1) {
@@ -95,7 +95,7 @@ export function extractAllStates(stateMachine) {
   })
 
   // Transform `#root.myState` to `myState`
-  let statesWithoutPrefix = filteredStates.map(state => {
+  let statesWithoutPrefix = filteredStates.map((state) => {
     const transformedString = state.replace(`${machine.id}.`, '')
     return transformedString
   })
