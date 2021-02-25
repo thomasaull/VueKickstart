@@ -28,5 +28,14 @@ export default {
     opacity: 0.5;
     pointer-events: none;
   }
+
+  &:focus,
+  &.is-focus {
+    color: blue;
+
+    @include mixin.isKeyboard {
+      outline: 2px solid blue;
+    }
+  }
 }
 </style>

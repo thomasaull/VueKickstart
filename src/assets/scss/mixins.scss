@@ -181,6 +181,12 @@
   }
 }
 
+@mixin isKeyboard() {
+  [data-whatinput='keyboard'] & {
+    @content;
+  }
+}
+
 // Usage:
 // @include font-face("Meta", "/fonts/MetaPro-Normal");
 // @include font-face("Meta", "/fonts/MetaPro-Bold", bold);

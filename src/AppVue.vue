@@ -13,10 +13,10 @@
 </template>
 
 <script>
+import { LAYOUT } from '@/constants/layout'
+
 import LayoutDefault from '@/layouts/LayoutDefault'
 import LayoutNaked from '@/layouts/LayoutNaked'
-
-import { LAYOUT } from '@/constants/layout'
 
 export default {
   name: 'App',

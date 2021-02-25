@@ -1,4 +1,5 @@
 // For shared configs between App and Storybook
+import 'what-input'
 import axios from 'axios'
 import PortalVue from 'portal-vue'
 import Vue from 'vue'

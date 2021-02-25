@@ -11,6 +11,7 @@
         <div
           class="StateWrapper-content"
           :class="state.documentState ? `is-${state.documentState}` : null"
+          :data-whatinput="state.whatinput"
         >
           <slot :state="state.state" />
         </div>
@@ -24,7 +25,7 @@ export default {
   name: 'StateWrapper',
 
   props: {
-    additionalStates: { type: Array, default: () => [] }
+    additionalStates: { type: Array, default: () => [] },
   },
 
   data() {
@@ -36,22 +37,23 @@ export default {
         {
           state: 'focus',
           label: 'focus on Keyboard Navigation',
-          documentState: 'keyboardNavigation'
+          documentState: 'keyboardNavigation',
+          whatinput: 'keyboard',
         },
-        { state: 'active' }
-      ]
+        { state: 'active' },
+      ],
     }
   },
 
   computed: {
     normalizedStates() {
-      const normalizedAdditionalStates = this.additionalStates.map(state => ({
-        state: state
+      const normalizedAdditionalStates = this.additionalStates.map((state) => ({
+        state: state,
       }))
 
       return [...this.defaultStates, ...normalizedAdditionalStates]
-    }
-  }
+    },
+  },
 }
 </script>
 
