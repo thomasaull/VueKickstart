@@ -1,21 +1,48 @@
 <template>
   <div class="App">
-    <component :is="layout"> <router-view :key="$route.meta.id" /> </component>
+    My App
+    <component :is="normalizedLayout">
+      <router-view :key="$route.meta.id" />
+    </component>
   </div>
 </template>
 
 <script>
-import DefaultLayout from '@/layouts/DefaultLayout'
-import NakedLayout from '@/layouts/NakedLayout'
+import LayoutDefault from '@/layouts/LayoutDefault'
+import LayoutNaked from '@/layouts/LayoutNaked'
+
+import { LAYOUT } from '@/constants/layout'
 
 export default {
   name: 'App',
-  components: { DefaultLayout, NakedLayout }, // eslint-disable-line
+  components: {
+    LayoutDefault,
+    LayoutNaked
+  },
+
+  data() {
+    return {
+      layout: undefined
+    }
+  },
 
   computed: {
-    layout() {
-      if (this.$route.meta.layout) return `${this.$route.meta.layout}Layout`
-      return 'DefaultLayout'
+    normalizedLayout() {
+      if (this.layout) {
+        return this.layout
+      }
+
+      return LAYOUT.NAKED
+    }
+  },
+
+  created() {
+    this.$eventHub.$on('Layout:Update', this.updateLayout)
+  },
+
+  methods: {
+    updateLayout(layout) {
+      this.layout = layout
     }
   }
 }
