@@ -3,7 +3,6 @@
     <component :is="normalizedLayout">
       <slot v-if="isStorybook" />
       <router-view v-if="!isStorybook" :key="$route.meta.id" />
-      <router-view />
     </component>
 
     <div class="App-portals">
