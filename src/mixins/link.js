@@ -6,20 +6,40 @@
 export default {
   props: {
     href: { type: String },
-    to: { type: [String, Object] }
+    to: { type: [String, Object] },
+    linkOpenInNewWindow: { type: Boolean, default: false }
   },
 
   computed: {
     link_tag() {
       if (this.to) return 'router-link'
       if (this.href) return 'a'
+
       return 'button'
     },
 
     link_props() {
-      if (this.tag === 'router-link') return { to: this.to }
-      if (this.tag === 'a') return { href: this.href }
-      // if (this.tag === 'button') return { type: 'button' }
+      const baseProps = {}
+
+      if (this.linkOpenInNewWindow) {
+        baseProps.target = '_blank'
+      }
+
+      if (this.link_tag === 'router-link') {
+        return {
+          ...baseProps,
+          to: this.to
+        }
+      }
+
+      if (this.link_tag === 'a') {
+        return {
+          ...baseProps,
+          href: this.href
+        }
+      }
+
+      // if (this.link_tag === 'button') return { type: 'button' }
     }
   }
 }
