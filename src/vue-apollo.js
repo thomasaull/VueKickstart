@@ -10,7 +10,7 @@ import {
 
 import { ApolloLink /*Observable*/ } from 'apollo-link'
 import { BatchHttpLink } from 'apollo-link-batch-http'
-import { GRAPHQL_URL } from '@/config/urls'
+import { GRAPHQL_URL } from '@/constants/urls'
 // import { onError } from 'apollo-link-error'
 // import find from 'lodash/find'
 // import eventHub from '@/eventHub'

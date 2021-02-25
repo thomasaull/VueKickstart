@@ -1,4 +1,4 @@
-@forward '@/assets/scss/colors' as color-*;
+// @forward '@/assets/scss/colors' as color-*;
 
 $contentMinWidth: 320px;
 $contentMaxWidth: 1200px;
@@ -30,3 +30,10 @@ $duration--hoverIn: 0.05s;
 $duration--hoverOut: 0.3s;
 $duration--fast: 0.1s;
 $duration--default: 0.2s;
+
+/* stylelint-disable */
+:export {
+  constant: {
+    duration--hoverIn: $duration--hoverIn;
+  }
+}

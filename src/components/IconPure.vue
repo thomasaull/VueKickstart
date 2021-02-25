@@ -1,16 +1,13 @@
 <template>
-  <component :is="svg" class="Icon" v-on="$listeners" />
+  <component :is="svg" class="IconPure" />
 </template>
 
 <script>
 export default {
-  name: 'Icon',
+  name: 'IconPure',
 
   props: {
-    name: {
-      type: String,
-      required: true
-    }
+    name: { type: String, required: true }
   },
 
   data() {
@@ -27,3 +24,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.IconPure {
+  @include mixin.svgIcon;
+}
+</style>

@@ -49,9 +49,7 @@ export default {
 </script>
 
 <style lang="scss">
-// @import '../node_modules/reset-css/reset.css';
 @import '@/assets/scss/reset.scss';
-// @import './assets/scss/reset.scss';
 @import './assets/scss/default.scss';
 
 .App {

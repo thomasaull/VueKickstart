@@ -1,49 +1,46 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import axios from 'axios'
-// import forEach from 'lodash/forEach'
-// import has from 'lodash/has'
+
+// import store from '@/store'
 
 Vue.use(Router)
 
-import Home from '@/pages/Home.vue'
+import Home from '@/views/Home.vue'
 
-export async function createRouter() {
-  const router = new Router({
-    mode: 'history',
-    base: '/',
+export const router = new Router({
+  mode: 'history',
+  base: '/',
 
-    scrollBehavior(route, from) {
-      if (route.name === from.name) {
-        return
-      }
-
+  scrollBehavior(route, from) {
+    if (route.name === from.name) {
       return
-    },
+    }
 
-    routes: [
-      {
-        path: '/',
-        component: Home
-      }
-    ]
-  })
+    return
+  },
 
-  // const { data: routesFromApi } = await axios.get('routes')
-  // const routes = walkRoutes(routesFromApi)
+  routes: [
+    {
+      path: '/',
+      name: 'home',
+      component: Home
+    }
+  ]
+})
 
-  // router.addRoutes(routes)
+// TODO: This should be done differently
+// const { data: routesFromApi } = await axios.get('routes')
+// const routes = walkRoutes(routesFromApi)
 
-  // router.addRoutes([
-  //   // {
-  //   //   path: '*',
-  //   //   meta: { layout: 'Naked' },
-  //   //   component: Error404
-  //   // }
-  // ])
+// router.addRoutes(routes)
 
-  return router
-}
+// router.addRoutes([
+//   // {
+//   //   path: '*',
+//   //   meta: { layout: 'Naked' },
+//   //   component: Error404
+//   // }
+// ])
 
 // function walkRoutes(routes) {
 //   forEach(routes, route => {
@@ -79,3 +76,13 @@ export async function createRouter() {
 
 //   return routes
 // }
+
+// Logic for redirect to request url from: https://stackoverflow.com/a/51034158/7236347
+// router.beforeEach((to, from, next) => {
+//   if (to.meta.auth !== false && !store.getters['auth/isLoggedIn']) {
+//     const loginpath = to.path || window.location.pathname
+//     next({ path: '/login', query: { from: loginpath } })
+//   }
+
+//   next()
+// })
