@@ -1,9 +1,14 @@
 <template>
   <div class="App">
-    My App
     <component :is="normalizedLayout">
-      <router-view :key="$route.meta.id" />
+      <slot v-if="isStorybook" />
+      <router-view v-if="!isStorybook" :key="$route.meta.id" />
+      <router-view />
     </component>
+
+    <div class="App-portals">
+      <!-- <portal-target name="examplePortal" class="App-examplePortal" /> -->
+    </div>
   </div>
 </template>
 
@@ -18,6 +23,10 @@ export default {
   components: {
     LayoutDefault,
     LayoutNaked
+  },
+
+  props: {
+    isStorybook: { type: Boolean, default: false }
   },
 
   data() {
@@ -53,6 +62,16 @@ export default {
 @import './assets/scss/default.scss';
 
 .App {
-  color: red;
+  font-family: var(--fontStack-default);
+  font-size: var(--fontSize-default);
+  line-height: var(--lineHeight-default);
+  color: color.$text-default;
+
+  &-portals {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+  }
 }
 </style>

@@ -1,31 +1,40 @@
 // https://storybook.js.org/docs/guides/guide-vue/
-// import { addDecorator } from '@storybook/vue'
-// import { useArgs } from '@storybook/client-api'
+import { addDecorator } from '@storybook/vue'
+import { useArgs } from '@storybook/client-api'
+import Vue from 'vue'
+import Router from 'vue-router'
 
-// import '@/sharedMain'
-// import App from '@/AppVue.vue'
+import { sharedComponentParts } from '@/sharedMain'
+import App from '@/AppVue.vue'
 
-// export const parameters = {
-//   controls: { expanded: true }
-//   actions: { argTypesRegex: "^on[A-Z].*" },
-// }
+Vue.use(Router)
 
-// addDecorator(() => {
-//   const [iDontNeedThis, updateArgs] = useArgs()
+export const parameters = {
+  // controls: { expanded: true },
+  actions: { argTypesRegex: '^on[A-Z].*' }
+}
 
-//   return {
-//     name: 'DecoratorDefault',
-//     components: { App },
-//     provide: {
-//       updateArgs: updateArgs
-//     },
+addDecorator(() => {
+  const [iDontNeedThis, updateArgs] = useArgs()
 
-//     template: `
-//       <div class="is-storybook" style="position: relative;">
-//         <App>
-//           <story/>
-//         </App>
-//       </div>
-//     `
-//   }
-// })
+  return {
+    ...sharedComponentParts,
+    router: new Router(),
+
+    name: 'DecoratorDefault',
+
+    components: {
+      App
+    },
+
+    provide: {
+      updateArgs: updateArgs
+    },
+
+    template: `
+      <App :isStorybook="true">
+        <story/>
+      </App>
+    `
+  }
+})
