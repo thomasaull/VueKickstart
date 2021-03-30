@@ -1,20 +1,18 @@
 <template>
-  <div class="Home">Home</div>
+  <div class="home">
+    <img alt="Vue logo" src="../assets/logo.png" />
+    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  </div>
 </template>
 
-<script>
-import { LAYOUT } from '@/constants/layout'
-import useLayout from '@/mixins/useLayout'
+<script lang="ts">
+import { defineComponent } from "vue";
+import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
 
-export default {
-  name: 'Home',
-  components: {},
-  mixins: [useLayout],
-
-  data() {
-    return {
-      useLayout: LAYOUT.DEFAULT,
-    }
+export default defineComponent({
+  name: "Home",
+  components: {
+    HelloWorld,
   },
-}
+});
 </script>

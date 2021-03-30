@@ -4,7 +4,7 @@ import Vue from 'vue'
 import VueMatomo from 'vue-matomo'
 
 import { sharedComponentParts } from '@/sharedMain'
-import App from '@/AppVue.vue'
+import App from '@/AppVue2.vue'
 import { router } from '@/router'
 
 // TASKS FOR PRODUCTION ONLY:
