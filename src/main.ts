@@ -1,16 +1,16 @@
-import { createApp, h, provide } from "vue";
-import App from "./App.vue";
+import { createApp, h, provide } from 'vue'
+import App from './App.vue'
 
 // import { createProvider } from "./vue-apollo";
-import router from "./router";
-import store from "./store";
+import router from './router'
+import store from './store'
 
-import { apolloClient } from "@/vue-apollo";
+import { apolloClient } from '@/vue-apollo'
 import {
   DefaultApolloClient,
   // ApolloClients,
   // provideApolloClient,
-} from "@vue/apollo-composable";
+} from '@vue/apollo-composable'
 // import VueApollo from "@vue/apollo-option";
 
 // const apolloProvider = new VueApollo({
@@ -23,7 +23,7 @@ const app = createApp({
     // provide(ApolloClients, {
     //   default: apolloClient,
     // });
-    provide(DefaultApolloClient, apolloClient);
+    provide(DefaultApolloClient, apolloClient)
     // provideApolloClient(apolloClient);
     // provide(DefaultApolloClient, {
     //   default: apolloClient,
@@ -31,16 +31,16 @@ const app = createApp({
   },
 
   render() {
-    return h(App);
+    return h(App)
   },
-});
+})
 
-app.use(store);
-app.use(router);
+app.use(store)
+app.use(router)
 // eslint-disable-next-line
 // app.use(VueApollo); // @ts-ignore
 // app.use(apolloProvider);
-app.mount("#app");
+app.mount('#app')
 
 // eslint-disable-next-line
 // @ts-ignore 
