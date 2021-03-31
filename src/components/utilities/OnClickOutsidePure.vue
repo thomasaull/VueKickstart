@@ -1,5 +1,11 @@
-<script>
-export default {
+<template>
+  <slot />
+</template>
+
+<script lang="ts">
+import { defineComponent, h } from 'vue'
+
+export default defineComponent({
   name: 'OnClickOutsidePure',
 
   props: {
@@ -10,12 +16,12 @@ export default {
     document.addEventListener('click', this.onDocumentClick)
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     document.removeEventListener('click', this.onDocumentClick)
   },
 
   methods: {
-    onDocumentClick(event) {
+    onDocumentClick(event: Event) {
       // Element is the slot element
       if (event.target === this.$el) return
 
@@ -26,8 +32,9 @@ export default {
     },
   },
 
-  render() {
-    return this.$slots.default[0]
-  },
-}
+  // render() {
+  //   if (!this.$slots.default) return
+  //   return this.$slots.default()
+  // },
+})
 </script>

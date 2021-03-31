@@ -1,7 +1,9 @@
+import { Story, Meta } from '@storybook/vue3/types-6-0'
+
 import OnClickOutsidePure from '@/components/utilities/OnClickOutsidePure.vue'
 import OnClickOutsidePureStory from '@/components/utilities/OnClickOutsidePureStory.vue'
 
-export default {
+const meta: Meta = {
   title: 'utilities/OnClickOutsidePure',
   component: OnClickOutsidePure,
 
@@ -9,18 +11,24 @@ export default {
     clickOutside: { action: 'clickOutside' },
   },
 }
+export default meta
 
-const Template = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
+const Template: Story = (args) => ({
   components: { OnClickOutsidePureStory },
+
+  setup() {
+    return {
+      args,
+    }
+  },
 
   template: `
     <OnClickOutsidePureStory
       v-bind="$props"
-      @clickOutside="clickOutside"
+      @clickOutside="args.clickOutside"
     />
   `,
 })
 
-export const Default = Template.bind({})
-Default.args = {}
+export const Primary = Template.bind({})
+Primary.args = {}
