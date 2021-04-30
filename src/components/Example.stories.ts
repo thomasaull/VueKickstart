@@ -9,7 +9,7 @@ interface Args {
 }
 
 const meta: Meta<Args> = {
-  title: 'Bla',
+  title: 'Example',
   component: Example,
 
   args: {

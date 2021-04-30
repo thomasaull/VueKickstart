@@ -3,32 +3,31 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, PropType } from 'vue'
 
-import { IBook } from "./Example.d";
+import { test } from '@/utilities/jsTestUtility'
 
-// export enum bla {
-//   Up = "UP",
-//   Down = "DOWN",
-// }
+import { IBook } from './Example.d'
 
 export default defineComponent({
-  name: "Example",
+  name: 'Example',
   components: {},
 
   props: {
-    name: { type: String, default: undefined },
     book: {
       type: Object as PropType<IBook>,
       default: undefined,
     },
-    // name: { type: String as PropType<bla>, default: undefined },
   },
 
   setup(props) {
     // console.log(props.book.)
   },
-});
+
+  mounted() {
+    console.log(test)
+  },
+})
 </script>
 
 <style lang="scss">
