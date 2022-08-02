@@ -98,8 +98,10 @@
     "vue-loader": "^16.8.3",
     "vue-tsc": "^0.38.8"
   },
-  "no-gitHooks": {
-    "pre-commit": "lint-staged"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "no-lint-staged": {
     "*.{js,vue}": [
