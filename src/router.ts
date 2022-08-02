@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 
-import { LAYOUT } from '@/constants/layout';
+import { LAYOUT } from '@/constants/layout'
 
 import TaViewHome from '@/views/TaViewHome.vue'
 // import Test from "@/components/Test.vue";
@@ -12,17 +12,16 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Home',
     component: TaViewHome,
     meta: {
-      layout: LAYOUT.DEFAULT
-    }
+      layout: LAYOUT.DEFAULT,
+    },
   },
   // {
-  //   path: "/about",
-  //   name: "About",
+  //   path: '/about',
+  //   name: 'about',
   //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // this generates a separate chunk (About.[hash].js) for this route
   //   // which is lazy-loaded when the route is visited.
-  //   component: () =>
-  //     import(/* webpackChunkName: "about" */ "../views/About.vue"),
+  //   component: () => import('../views/AboutView.vue'),
   // },
 ]
 

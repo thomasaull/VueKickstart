@@ -12,7 +12,7 @@ import { defineComponent, computed } from 'vue'
 import type { PropType } from 'vue'
 import { useRoute } from 'vue-router'
 
-import { LAYOUT } from '@/constants/layout';
+import { LAYOUT } from '@/constants/layout'
 import type { Layout } from '@/constants/layout'
 
 import TaLayoutDefaultPure from '@/layouts/TaLayoutDefaultPure.vue'
@@ -28,7 +28,7 @@ export default defineComponent({
 
   components: {
     TaLayoutDefaultPure,
-    TaLayoutNakedPure
+    TaLayoutNakedPure,
   },
 
   props: {
@@ -59,9 +59,9 @@ export default defineComponent({
 
     return {
       layoutComponent,
-      route
+      route,
     }
-  }
+  },
 })
 </script>
 
