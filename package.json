@@ -3,7 +3,8 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "lint:style": "stylelint **/*.{vue,htm,html,css,sss,less,scss} --fix",
+    "lint:style": "stylelint **/*.{vue,htm,html,css,sss,less,scss}",
+    "lint:style:fix": "npm run lint:style -- --fix",
     "storybook:serve": "start-storybook -p 6006 --no-open",
     "storybook:build": "build-storybook",
     "vue:serve": "vite",
@@ -14,7 +15,9 @@
     "test:e2e:ci": "start-server-and-test preview http://localhost:4173/ 'cypress run --e2e'",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore",
+    "lint:fix": "npm run lint -- --fix",
+    "format": "prettier -w -u",
     "postinstall": "rm -rf ./node_modules/@types/react"
   },
   "dependencies": {
@@ -102,15 +105,5 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  },
-  "no-lint-staged": {
-    "*.{js,vue}": [
-      "vue-cli-service lint",
-      "git add"
-    ],
-    "*.{vue,htm,html,css,sss,less,scss}": [
-      "npm run lint:style",
-      "git add"
-    ]
   }
 }

@@ -1,4 +1,6 @@
+// eslint-disable-next-line no-undef
 module.exports = {
-  '*.{js,ts,vue}': 'eslint',
-  // '*.{vue,css,scss}': 'npm run lint:style',
+  '*.{js,ts,vue}': 'eslint --ignore-path .gitignore --fix',
+  '*.{css,scss,vue}': 'stylelint --fix',
+  '*': 'prettier -w -u',
 }
