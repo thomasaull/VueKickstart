@@ -1,2 +1,1 @@
-# Add automated formatting
-a56e06a03aa03c02e1ab93850f27b7914f4ae919
+# Add commit hashes for commits you want to ignore in git-blame, e.g. code-formating

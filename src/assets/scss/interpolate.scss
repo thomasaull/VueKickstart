@@ -1,6 +1,8 @@
 // Source: https://www.madebymike.com.au/writing/fluid-type-calc-examples/
 // stylelint-disable
 
+// TODO: Refactor to clamp 
+
 @mixin interpolate(
   $properties,
   $min-screen,

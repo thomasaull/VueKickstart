@@ -1,18 +1,11 @@
 <template>
   <div class="StateWrapper">
-    <div
-      v-for="state in normalizedStates"
-      :key="state.label || state.state"
-      class="StateWrapper-state"
-    >
+    <div v-for="state in normalizedStates" :key="state.label || state.state" class="StateWrapper-state">
       <div class="StateWrapper-title">{{ state.label || state.state }}:</div>
 
       <div class="StateWrapper-container">
-        <div
-          class="StateWrapper-content"
-          :class="state.documentState ? `is-${state.documentState}` : null"
-          :data-whatinput="state.whatinput"
-        >
+        <div class="StateWrapper-content" :class="state.documentState ? `is-${state.documentState}` : null"
+          :data-whatinput="state.whatinput">
           <slot :state="state.state" />
         </div>
       </div>
@@ -20,41 +13,55 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent, PropType, computed } from 'vue'
+
+interface State {
+  state: string
+  label?: string
+  documentState?: string
+  whatinput?: string
+}
+
+export default defineComponent({
   name: 'StateWrapper',
 
   props: {
-    additionalStates: { type: Array, default: () => [] },
+    additionalStates: { type: Array as PropType<string[]>, default: () => [] },
   },
 
-  data() {
+  setup(props) {
+    const defaultStates: State[] = [
+      { state: 'default' },
+      { state: 'hover' },
+      { state: 'focus' },
+      {
+        state: 'focus',
+        label: 'focus on Keyboard Navigation',
+        documentState: 'keyboardNavigation',
+        whatinput: 'keyboard',
+      },
+      { state: 'active' },
+    ]
+
+    const normalizedStates = computed<State[]>(() => {
+      const normalizedAdditionalStates: State[] = props.additionalStates.map(
+        (state: string) => {
+          return {
+            state: state,
+          }
+        }
+      )
+
+      return [...defaultStates, ...normalizedAdditionalStates]
+    })
+
     return {
-      defaultStates: [
-        { state: 'default' },
-        { state: 'hover' },
-        { state: 'focus' },
-        {
-          state: 'focus',
-          label: 'focus on Keyboard Navigation',
-          documentState: 'keyboardNavigation',
-          whatinput: 'keyboard',
-        },
-        { state: 'active' },
-      ],
+      normalizedStates
     }
   },
 
-  computed: {
-    normalizedStates() {
-      const normalizedAdditionalStates = this.additionalStates.map((state) => ({
-        state: state,
-      }))
-
-      return [...this.defaultStates, ...normalizedAdditionalStates]
-    },
-  },
-}
+})
 </script>
 
 <style lang="scss">

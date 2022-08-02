@@ -4,13 +4,8 @@
       "path": "."
     }
   ],
+ 
   "settings": {
-    "search.exclude": {
-      "**/.nuxt": true
-    },
-    "eslint.format.enable": true,
-    "editor.formatOnSave": false,
-    "vetur.validation.template": false,
     "editor.codeActionsOnSave": {
       "source.fixAll": true
     }

@@ -1,31 +1,24 @@
+/* eslint-env node */
+require('@rushstack/eslint-patch/modern-module-resolution')
+
 module.exports = {
   root: true,
-  env: {
-    node: true,
-  },
   extends: [
     'plugin:vue/vue3-recommended',
     'eslint:recommended',
-    '@vue/typescript/recommended',
-    '@vue/prettier',
-    '@vue/prettier/@typescript-eslint',
+    '@vue/eslint-config-typescript/recommended',
+    '@vue/eslint-config-prettier',
+    'plugin:storybook/recommended',
   ],
-  parserOptions: {
-    ecmaVersion: 2020,
-  },
+
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'ban-ts-comment': 'allow-with-description',
   },
+
   overrides: [
     {
-      files: [
-        '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)',
-      ],
-      env: {
-        jest: true,
-      },
+      files: ['cypress/e2e/**.{cy,spec}.{js,ts,jsx,tsx}'],
+      extends: ['plugin:cypress/recommended'],
     },
   ],
 }

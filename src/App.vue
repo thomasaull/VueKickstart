@@ -1,30 +1,72 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div class="App">
+    <component :is="layoutComponent">
+      <slot v-if="isStorybook" />
+      <router-view v-if="!isStorybook" />
+    </component>
   </div>
-  <router-view />
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script lang="ts">
+import { defineComponent, computed } from 'vue'
+import type { PropType } from 'vue'
+import { useRoute } from 'vue-router'
+
+import { LAYOUT } from '@/constants/layout';
+import type { Layout } from '@/constants/layout'
+
+import TaLayoutDefaultPure from '@/layouts/TaLayoutDefaultPure.vue'
+import TaLayoutNakedPure from '@/layouts/TaLayoutNakedPure.vue'
+
+export interface Props {
+  isStorybook?: boolean
+  storybookLayout?: Layout
 }
 
-#nav {
-  padding: 30px;
+export default defineComponent({
+  name: 'App',
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+  components: {
+    TaLayoutDefaultPure,
+    TaLayoutNakedPure
+  },
 
-    &.router-link-exact-active {
-      color: #42b983;
+  props: {
+    isStorybook: { type: Boolean, default: false },
+    storybookLayout: {
+      type: String as PropType<Props['storybookLayout']>,
+      default: undefined,
+    },
+  },
+
+  setup(props) {
+    const route = useRoute()
+
+    const layoutComponent = computed((): Layout => {
+      if (props.isStorybook && props.storybookLayout) {
+        return props.storybookLayout
+      }
+
+      const routeMetaLayout = route.meta.layout
+      if (routeMetaLayout) {
+        if (Object.values(LAYOUT).includes(routeMetaLayout as Layout)) {
+          return routeMetaLayout as Layout
+        }
+      }
+
+      return LAYOUT.NAKED
+    })
+
+    return {
+      layoutComponent,
+      route
     }
   }
+})
+</script>
+
+<style lang="scss">
+.App {
+  $block: &;
 }
 </style>

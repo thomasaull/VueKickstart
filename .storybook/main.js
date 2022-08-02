@@ -1,10 +1,12 @@
-module.exports = {
-  "stories": [
-    "../src/**/*.stories.mdx",
-    "../src/**/*.stories.@(js|jsx|ts|tsx)"
-  ],
-  "addons": [
-    "@storybook/addon-links",
-    "@storybook/addon-essentials"
-  ]
-}
+/**
+ * Make main.ts a module
+ * @see https://miyauchi.dev/posts/storybook-vite/
+ */
+
+ const { register } = require('esbuild-register/dist/node')
+
+ register({
+   // target: 'node16'
+ })
+ 
+ module.exports = require('./main.ts')

@@ -1,13 +1,19 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Home from '@/views/Home.vue'
+import { createRouter, createWebHistory } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
+
+import { LAYOUT } from '@/constants/layout';
+
+import TaViewHome from '@/views/TaViewHome.vue'
 // import Test from "@/components/Test.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Home',
-    // component: Test,
-    component: Home,
+    component: TaViewHome,
+    meta: {
+      layout: LAYOUT.DEFAULT
+    }
   },
   // {
   //   path: "/about",
@@ -21,7 +27,7 @@ const routes: Array<RouteRecordRaw> = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 })
 
