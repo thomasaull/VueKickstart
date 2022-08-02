@@ -1,0 +1,21 @@
+overwrite: true
+schema: "http://api.mokk.test/graphql"
+documents: "src/**/*.graphql"
+generates:
+  # src/generated/graphql.d.ts:
+  #   plugins:
+  #     - "typescript"
+  #     - "typescript-operations"
+  #     - "typescript-graphql-files-modules"
+  #     - "fragment-matcher"
+  src/generated/graphql.d.ts:
+    plugins:
+      - "typescript-graphql-files-modules"
+  src/generated/types.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "fragment-matcher"
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"

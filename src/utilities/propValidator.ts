@@ -1,4 +1,4 @@
-export function oneOf(value, allowed) {
+export function oneOf(value: string, allowed: string[]): boolean {
   if (!Array.isArray(allowed)) {
     allowed = Object.values(allowed)
   }

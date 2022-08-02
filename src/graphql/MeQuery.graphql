@@ -1,0 +1,11 @@
+query Me {
+  me {
+    id
+    name
+    gravatar
+    roles {
+      id
+      name
+    }
+  }
+}
