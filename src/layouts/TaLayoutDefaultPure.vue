@@ -1,6 +1,6 @@
 <template>
   <div class="TaLayoutDefaultPure">
-     Default Layout:
+    Default Layout:
     <slot />
   </div>
 </template>

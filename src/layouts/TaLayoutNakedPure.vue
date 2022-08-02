@@ -1,6 +1,6 @@
 <template>
   <div class="TaLayoutNakedPure">
-     Naked Layout:
+    Naked Layout:
     <slot />
   </div>
 </template>
