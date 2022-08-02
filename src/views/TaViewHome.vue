@@ -1,6 +1,5 @@
 <template>
-  <div class="TaViewHome">
-  </div>
+  <div class="TaViewHome"></div>
 </template>
 
 <script lang="ts">

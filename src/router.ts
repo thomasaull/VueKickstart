@@ -4,7 +4,6 @@ import type { RouteRecordRaw } from 'vue-router'
 import { LAYOUT } from '@/constants/layout'
 
 import TaViewHome from '@/views/TaViewHome.vue'
-// import Test from "@/components/Test.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -23,6 +22,8 @@ const routes: Array<RouteRecordRaw> = [
   //   // which is lazy-loaded when the route is visited.
   //   component: () => import('../views/AboutView.vue'),
   // },
+
+  // { path: '/:pathMatch(.*)*', name: 'not-found', component: TaNotFound },
 ]
 
 const router = createRouter({

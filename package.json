@@ -1,29 +1,23 @@
 {
-  "name": "vue-kickstart",
-  "version": "2.0.0",
-  "private": true,
+  "name": "vue-kickstart-new",
+  "version": "0.0.0",
   "scripts": {
-    "lint:style": "stylelint **/*.{vue,htm,html,css,sss,less,scss}",
-    "lint:style:fix": "npm run lint:style -- --fix",
-    "storybook:serve": "start-storybook -p 6006 --no-open",
-    "storybook:build": "build-storybook",
-    "vue:serve": "vite",
-    "vue:build": "run-p type-check build-only",
+    "dev": "vite",
+    "build": "run-p type-check build-only",
     "preview": "vite preview --port 4173",
     "test:unit": "vitest --environment jsdom",
     "test:e2e": "start-server-and-test preview http://localhost:4173/ 'cypress open --e2e'",
     "test:e2e:ci": "start-server-and-test preview http://localhost:4173/ 'cypress run --e2e'",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore",
-    "lint:fix": "npm run lint -- --fix",
-    "format": "prettier -w -u",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "prepare": "husky install",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
     "postinstall": "rm -rf ./node_modules/@types/react"
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
-    "@sentry/browser": "^5.26.0",
-    "@sentry/integrations": "^5.26.0",
     "@vue/apollo-composable": "^4.0.0-alpha.19",
     "@xstate/inspect": "^0.7.0",
     "@xstate/vue": "^2.0.0",
@@ -43,13 +37,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",
-    "@graphql-codegen/cli": "^2.11.3",
-    "@graphql-codegen/fragment-matcher": "^3.3.0",
-    "@graphql-codegen/introspection": "^2.2.0",
-    "@graphql-codegen/typed-document-node": "^2.2.13",
-    "@graphql-codegen/typescript": "^2.7.2",
-    "@graphql-codegen/typescript-document-nodes": "^2.3.2",
-    "@graphql-codegen/typescript-operations": "^2.4.2",
     "@rollup/plugin-graphql": "^1.1.0",
     "@rushstack/eslint-patch": "^1.1.0",
     "@semantic-release/git": "^10.0.1",
@@ -61,7 +48,6 @@
     "@storybook/testing-library": "^0.0.13",
     "@storybook/vue3": "npm:@thomasaull/storybook-vue3@^6.5.9",
     "@types/jsdom": "^16.2.14",
-    "@types/lodash-es": "^4.17.6",
     "@types/node": "^16.11.45",
     "@vitejs/plugin-vue": "^3.0.1",
     "@vue/eslint-config-prettier": "^7.0.0",
@@ -73,7 +59,7 @@
     "esbuild-register": "^3.3.3",
     "eslint": "^8.5.0",
     "eslint-plugin-cypress": "^2.12.1",
-    "eslint-plugin-storybook": "^0.6.1",
+    "eslint-plugin-storybook": "^0.6.2",
     "eslint-plugin-vue": "^9.0.0",
     "husky": "^8.0.1",
     "jsdom": "^20.0.0",
@@ -92,7 +78,7 @@
     "stylelint-config-standard": "^26.0.0",
     "stylelint-config-standard-scss": "^5.0.0",
     "stylelint-config-standard-vue": "^1.0.0",
-    "stylelint-scss": "^4.2.0",
+    "stylelint-scss": "^4.3.0",
     "stylelint-selector-bem-pattern": "^2.1.1",
     "typescript": "~4.7.4",
     "vite": "^3.0.1",
@@ -100,10 +86,5 @@
     "vitest": "^0.18.1",
     "vue-loader": "^16.8.3",
     "vue-tsc": "^0.38.8"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
 }

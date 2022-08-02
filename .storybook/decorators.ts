@@ -22,11 +22,11 @@ export const withStates = (story) => {
     },
 
     template: `
-      <StateWrapper :additionalStates="additionalStates">
-        <template v-slot:default="{ state }">
-          <story :class="'is-'+state" />
-        </template>
-      </StateWrapper>
-    `,
+       <StateWrapper :additionalStates="additionalStates">
+         <template v-slot:default="{ state }">
+           <story :class="'is-'+state" />
+         </template>
+       </StateWrapper>
+     `,
   }
 }

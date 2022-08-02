@@ -1,13 +1,10 @@
 <template>
-  <div class="ExampleComponent"></div>
+  <div class="ExampleComponent">Example Component</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import type { PropType } from 'vue'
-
-// import { LAYOUT } from '@/constants/layout'
-// import type { Layout } from '@/constants/layout'
 
 export const propTypes = {
   myProp: {

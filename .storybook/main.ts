@@ -1,14 +1,12 @@
 import { mergeConfig, UserConfig, UserConfigExport } from 'vite'
 import { config as importedVueConfig, plugins } from '../vite.config'
 
-function isUserConfig(
-  config: UserConfigExport 
-): asserts config is UserConfig {
-  if(config instanceof Promise) {
+function isUserConfig(config: UserConfigExport): asserts config is UserConfig {
+  if (config instanceof Promise) {
     throw new Error('config needs to be typeof UserConfig. Is Promise')
   }
 
-  if(typeof config === 'function') {
+  if (typeof config === 'function') {
     throw new Error('config needs to be typeof UserConfig. Is Function')
   }
 }
@@ -21,6 +19,7 @@ export default {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
   ],
+
   framework: '@storybook/vue3',
 
   core: {
@@ -38,9 +37,9 @@ export default {
     const finalConfig = mergeConfig(config, {
       resolve: vueConfig.resolve,
       plugins: plugins,
-      css: vueConfig.css
+      css: vueConfig.css,
     })
 
     return finalConfig
-  }
+  },
 }

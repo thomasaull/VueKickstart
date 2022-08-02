@@ -1,3 +1,7 @@
+# Setup
+
+- Use Takeover mode: https://vuejs.org/guide/typescript/overview.html#takeover-mode
+
 # Some reading material
 
 - https://miyauchi.dev/posts/vite-vue3-typescript/

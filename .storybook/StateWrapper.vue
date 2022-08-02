@@ -1,11 +1,18 @@
 <template>
   <div class="StateWrapper">
-    <div v-for="state in normalizedStates" :key="state.label || state.state" class="StateWrapper-state">
+    <div
+      v-for="state in normalizedStates"
+      :key="state.label || state.state"
+      class="StateWrapper-state"
+    >
       <div class="StateWrapper-title">{{ state.label || state.state }}:</div>
 
       <div class="StateWrapper-container">
-        <div class="StateWrapper-content" :class="state.documentState ? `is-${state.documentState}` : null"
-          :data-whatinput="state.whatinput">
+        <div
+          class="StateWrapper-content"
+          :class="state.documentState ? `is-${state.documentState}` : null"
+          :data-whatinput="state.whatinput"
+        >
           <slot :state="state.state" />
         </div>
       </div>
@@ -57,10 +64,9 @@ export default defineComponent({
     })
 
     return {
-      normalizedStates
+      normalizedStates,
     }
   },
-
 })
 </script>
 

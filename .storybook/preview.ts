@@ -1,14 +1,24 @@
 import { Parameters, app } from '@storybook/vue3'
 import { useArgs, useParameter } from '@storybook/client-api'
 import { h } from 'vue'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
 import { attachStuffToAppInstance } from '@/sharedMain'
 import App from '@/App.vue'
 
 attachStuffToAppInstance(app)
 
+// Create fake router
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
+  routes: [
+    // Add fake routes
+  ],
+})
+app.use(router)
+
 export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
+  actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
     matchers: {
       color: /(background|color)$/i,
@@ -32,10 +42,10 @@ const decoratorApp = (story) => {
     provide: {
       updateArgs: updateArgs,
     },
-    
+
     setup() {
       return {
-        layout
+        layout,
       }
     },
 

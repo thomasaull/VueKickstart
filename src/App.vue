@@ -47,7 +47,7 @@ export default defineComponent({
         return props.storybookLayout
       }
 
-      const routeMetaLayout = route.meta.layout
+      const routeMetaLayout = route?.meta?.layout
       if (routeMetaLayout) {
         if (Object.values(LAYOUT).includes(routeMetaLayout as Layout)) {
           return routeMetaLayout as Layout
