@@ -6,6 +6,9 @@
 import { defineComponent } from 'vue'
 import type { PropType } from 'vue'
 
+// import { LAYOUT } from '@/constants/layout'
+// import type { Layout } from '@/constants/layout'
+
 export const propTypes = {
   myProp: {
     allowed: ['example', 'anotherOne'] as const,
