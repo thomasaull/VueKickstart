@@ -20,7 +20,8 @@
     "generate:graphql": "graphql-codegen --config codegen.yml",
     "generate:xstate": "xstate typegen 'src/**/*.ts?(x)'",
     "postinstall": "rm -rf ./node_modules/@types/react",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "codegen": "graphql-codegen"
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
@@ -44,10 +45,8 @@
   "devDependencies": {
     "@babel/core": "^7.18.10",
     "@graphql-codegen/cli": "^2.11.3",
-    "@graphql-codegen/fragment-matcher": "^3.3.0",
     "@graphql-codegen/typed-document-node": "^2.3.2",
     "@graphql-codegen/typescript": "^2.7.2",
-    "@graphql-codegen/typescript-document-nodes": "^2.3.2",
     "@graphql-codegen/typescript-operations": "^2.5.2",
     "@rollup/plugin-graphql": "^1.1.0",
     "@rushstack/eslint-patch": "^1.1.0",
