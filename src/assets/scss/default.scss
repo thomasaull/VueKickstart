@@ -50,10 +50,16 @@ body {
 
   // Prevent iOS to enlarge font-size
   -webkit-text-size-adjust: none;
+  text-size-adjust: none;
 
   /* Adds a hyphen where the word breaks, if supported (No Blink) */
   @include mixin.media('<=600px') {
     /* Adds a hyphen where the word breaks, if supported (No Blink) */
     hyphens: auto;
   }
+
+  font-family: var(--fontStack-default);
+  font-size: var(--fontSize-default);
+  line-height: var(--lineHeight-default);
+  color: color.$text-default;
 }

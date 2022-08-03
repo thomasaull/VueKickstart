@@ -1,0 +1,12 @@
+@use 'sass:map';
+
+// stylelint-disable-next-line selector-pseudo-class-no-unknown
+:export {
+  breakpoint: {
+    mobile: map.get(constant.$breakpoints, 'mobile');
+  }
+
+  color: {
+    key: color.$key;
+  }
+}

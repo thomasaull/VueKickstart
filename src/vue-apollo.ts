@@ -4,18 +4,15 @@ import {
   InMemoryCache,
 } from '@apollo/client/core'
 
-// HTTP connection to the API
+import URL from '@/constants/urls'
+
 const httpLink = createHttpLink({
-  // You should use an absolute URL here
-  uri: 'http://api.mokk.test/graphql',
+  uri: URL.GRAPHQL,
 })
 
-// Cache implementation
 const cache = new InMemoryCache()
 
-// Create the apollo client
 export const apolloClient = new ApolloClient({
-  connectToDevTools: true,
   link: httpLink,
   cache,
 })

@@ -3,11 +3,8 @@
 @use '@/assets/scss/constants' as constant;
 
 @forward '@/assets/scss/interpolate';
-
 @forward '~@/../node_modules/include-media/dist/_include-media.scss' with (
-  $breakpoints: (
-    mobile: 700px
-  )
+  $breakpoints: constant.$breakpoints
 );
 
 // This does not work with the sass @use/@forward syntax:

@@ -5,14 +5,10 @@
     }
   ],
   "settings": {
-    "search.exclude": {
-      "**/.nuxt": true
-    },
-    "eslint.format.enable": true,
-    "editor.formatOnSave": false,
-    "vetur.validation.template": false,
     "editor.codeActionsOnSave": {
       "source.fixAll": true
-    }
+    },
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }

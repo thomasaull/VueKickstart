@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "allowUnreachableCode": true,
     "paths": {
       "@/*": ["./src/*"]
     }
