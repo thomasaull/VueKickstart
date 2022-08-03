@@ -1,7 +1,9 @@
-overwrite: true
-# schema: "http://localhost:8000/graphql"
-schema: './generated/schema.graphql.json'
+schema:
+  - https://rickandmortyapi.com/graphql:
+      customFetch: 'node-fetch'
+
 documents: 'src/**/*.graphql'
+overwrite: true
 generates:
   generated/graphql.ts:
     plugins:

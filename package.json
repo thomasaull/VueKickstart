@@ -17,11 +17,10 @@
     "lint:style": "stylelint **/*.{vue,htm,html,css,sss,less,scss}",
     "lint:style:fix": "npm run lint:style -- --fix",
     "format": "prettier -w -u",
-    "generate:graphql": "graphql-codegen --config codegen.yml",
+    "generate:graphql": "graphql-codegen",
     "generate:xstate": "xstate typegen 'src/**/*.ts?(x)'",
     "postinstall": "rm -rf ./node_modules/@types/react",
-    "prepare": "husky install",
-    "codegen": "graphql-codegen"
+    "prepare": "husky install"
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
