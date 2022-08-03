@@ -4,8 +4,10 @@ import {
   InMemoryCache,
 } from '@apollo/client/core'
 
+import URL from '@/constants/urls'
+
 const httpLink = createHttpLink({
-  uri: 'https://rickandmortyapi.com/graphql',
+  uri: URL.GRAPHQL,
 })
 
 const cache = new InMemoryCache()
