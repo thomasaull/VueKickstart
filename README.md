@@ -20,3 +20,5 @@
 
 - [ ] Prefix .env variables with `VITE`, see: https://vitejs.dev/guide/env-and-mode.html#env-variables
 - [ ] Use glob import for icons: https://vitejs.dev/guide/features.html#glob-import
+- [ ] Add improved semantic-release setup
+- [ ] Add graphql-codegen
