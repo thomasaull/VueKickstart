@@ -4,6 +4,7 @@ schema:
 
 documents: 'src/**/*.graphql'
 overwrite: true
+
 generates:
   generated/graphql.ts:
     plugins:
@@ -11,3 +12,8 @@ generates:
       - typescript-operations
       - typed-document-node
       # - fragment-matcher
+
+hooks:
+  afterAllFileWrite:
+    - eslint --fix
+    - prettier --write
