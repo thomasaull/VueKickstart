@@ -1,0 +1,4 @@
+{{!-- Copied from /node_modules/semantic-release-gitmoji/lib/assets/templates --}}
+[`{{commit.short}}`](https://gitlab.com/{{owner}}/{{repo}}/commit/{{commit.short}}) {{subject}} {{#if issues}}(Issues:{{#each issues}} [`{{text}}`]({{link}}){{/each}}){{/if}}{{#if wip}}{{#each wip}}
+    - [`{{commit.short}}`](https://gitlab.com/{{owner}}/{{repo}}/commit/{{commit.short}}) {{subject}}{{/each}}
+{{/if}}
