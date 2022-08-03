@@ -1,12 +1,12 @@
 /**
  * Default
  */
-import Settings from '@/assets/svg/settings?component.svg'
+import Settings from '@/assets/icons/settings.svg?component'
 
 /**
  * Small
  */
-import SettingsSmall from '@/assets/svg/settings.small?component.svg'
+import SettingsSmall from '@/assets/icons/settings.small.svg?component'
 
 export default {
   /**
