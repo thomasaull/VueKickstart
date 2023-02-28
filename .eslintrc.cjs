@@ -4,32 +4,37 @@ require('@rushstack/eslint-patch/modern-module-resolution')
 module.exports = {
   root: true,
   env: {
-    node: true,
+    node: true
   },
+
   extends: [
     'plugin:vue/vue3-recommended',
     'eslint:recommended',
-    '@vue/eslint-config-typescript/recommended',
-    '@vue/eslint-config-prettier',
-    'plugin:storybook/recommended',
+    '@vue/eslint-config-typescript',
+    '@vue/eslint-config-prettier/skip-formatting',
+    'plugin:storybook/recommended'
   ],
+
+  parserOptions: {
+    ecmaVersion: 'latest'
+  },
 
   rules: {
     '@typescript-eslint/ban-ts-comment': [
       'warn',
       {
         // 'ts-expect-error': 'allow-with-description',
-        'ts-ignore': 'allow-with-description', // 'ts-nocheck': true,
+        'ts-ignore': 'allow-with-description' // 'ts-nocheck': true,
         // 'ts-check': false,
         // minimumDescriptionLength: 3,
-      },
-    ],
+      }
+    ]
   },
 
   overrides: [
     {
       files: ['cypress/e2e/**.{cy,spec}.{js,ts,jsx,tsx}'],
-      extends: ['plugin:cypress/recommended'],
-    },
-  ],
+      extends: ['plugin:cypress/recommended']
+    }
+  ]
 }
