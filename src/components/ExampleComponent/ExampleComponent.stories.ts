@@ -1,8 +1,8 @@
 import type { Meta, Story } from '@/types/storybook'
 
-import ExampleComponent, {
-  propTypes,
-} from '@/components/ExampleComponent/ExampleComponent.vue'
+import { withStates } from '@/../../.storybook/decorators'
+
+import ExampleComponent, { propTypes } from '@/components/ExampleComponent/ExampleComponent.vue'
 import type { Props } from '@/components/ExampleComponent/ExampleComponent.vue'
 
 interface Args extends Props {
@@ -12,18 +12,19 @@ interface Args extends Props {
 const meta: Meta<Args> = {
   title: 'ExampleComponent',
   component: ExampleComponent,
+  decorators: [withStates],
 
   argTypes: {
     myProp: {
       control: 'select',
-      options: propTypes.myProp.allowed,
-    },
+      options: propTypes.myProp.allowed
+    }
   },
 
   args: {
     exampleArg: 'test',
-    myProp: propTypes.myProp.default,
-  },
+    myProp: propTypes.myProp.default
+  }
 }
 export default meta
 
@@ -35,7 +36,7 @@ const Template: Story<Args> = (args, { argTypes }) => ({
     <ExampleComponent
       v-bind="$props"
     />
-  `,
+  `
 })
 
 export const Default = Template.bind({})

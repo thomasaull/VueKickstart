@@ -23,7 +23,7 @@
 <script lang="ts">
 import { defineComponent, PropType, computed } from 'vue'
 
-interface State {
+export interface State {
   state: string
   label?: string
   documentState?: string
@@ -34,7 +34,7 @@ export default defineComponent({
   name: 'StateWrapper',
 
   props: {
-    additionalStates: { type: Array as PropType<string[]>, default: () => [] },
+    additionalStates: { type: Array as PropType<string[]>, default: () => [] }
   },
 
   setup(props) {
@@ -46,27 +46,25 @@ export default defineComponent({
         state: 'focus',
         label: 'focus on Keyboard Navigation',
         documentState: 'keyboardNavigation',
-        whatinput: 'keyboard',
+        whatinput: 'keyboard'
       },
-      { state: 'active' },
+      { state: 'active' }
     ]
 
     const normalizedStates = computed<State[]>(() => {
-      const normalizedAdditionalStates: State[] = props.additionalStates.map(
-        (state: string) => {
-          return {
-            state: state,
-          }
+      const normalizedAdditionalStates: State[] = props.additionalStates.map((state: string) => {
+        return {
+          state: state
         }
-      )
+      })
 
       return [...defaultStates, ...normalizedAdditionalStates]
     })
 
     return {
-      normalizedStates,
+      normalizedStates
     }
-  },
+  }
 })
 </script>
 
