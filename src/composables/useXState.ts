@@ -17,6 +17,7 @@ import type {
   InterpreterFrom,
   InterpreterOptions,
   StateFrom,
+  StateValueFrom
 } from 'xstate'
 
 import { inspect } from '@xstate/inspect'
@@ -33,31 +34,30 @@ interface Options {
  * Copied and adapted from
  * @see https://github.com/statelyai/xstate/blob/main/packages/xstate-vue/src/useMachine.ts
  */
-type RestParams<TMachine extends AnyStateMachine> =
-  AreAllImplementationsAssumedToBeProvided<
-    TMachine['__TResolvedTypesMeta']
-  > extends false
-    ? [
-        options: InterpreterOptions &
-          UseMachineOptions<TMachine['__TContext'], TMachine['__TEvent']> &
-          InternalMachineOptions<
-            TMachine['__TContext'],
-            TMachine['__TEvent'],
-            TMachine['__TResolvedTypesMeta'],
-            true
-          > &
-          Options
-      ]
-    : [
-        options?: InterpreterOptions &
-          UseMachineOptions<TMachine['__TContext'], TMachine['__TEvent']> &
-          InternalMachineOptions<
-            TMachine['__TContext'],
-            TMachine['__TEvent'],
-            TMachine['__TResolvedTypesMeta']
-          > &
-          Options
-      ]
+type RestParams<TMachine extends AnyStateMachine> = AreAllImplementationsAssumedToBeProvided<
+  TMachine['__TResolvedTypesMeta']
+> extends false
+  ? [
+      options: InterpreterOptions &
+        UseMachineOptions<TMachine['__TContext'], TMachine['__TEvent']> &
+        InternalMachineOptions<
+          TMachine['__TContext'],
+          TMachine['__TEvent'],
+          TMachine['__TResolvedTypesMeta'],
+          true
+        > &
+        Options
+    ]
+  : [
+      options?: InterpreterOptions &
+        UseMachineOptions<TMachine['__TContext'], TMachine['__TEvent']> &
+        InternalMachineOptions<
+          TMachine['__TContext'],
+          TMachine['__TEvent'],
+          TMachine['__TResolvedTypesMeta']
+        > &
+        Options
+    ]
 
 /**
  * Copied and adapted from
@@ -68,18 +68,18 @@ type UseMachineReturn<
   TInterpreter = InterpreterFrom<TMachine>
 > = {
   state: Ref<StateFrom<TMachine> | undefined>
-  path: Ref<string | undefined>
+  path: Ref<StateValueFrom<TMachine> | undefined>
   meta: Ref<TMeta | undefined>
   service: Ref<TInterpreter | undefined>
   restartWith: (statePath: string) => void
 }
 
-type UseMachineReturnInitialized<
+export type UseMachineReturnInitialized<
   TMachine extends AnyStateMachine,
   TInterpreter = InterpreterFrom<TMachine>
 > = {
   state: Ref<StateFrom<TMachine>>
-  path: Ref<string>
+  path: Ref<StateValueFrom<TMachine>>
   meta: Ref<TMeta>
   service: Ref<TInterpreter>
   restartWith: (statePath: string) => void
@@ -104,14 +104,14 @@ export function useXState<TMachine extends AnyStateMachine>(
   ...[options = {}]: RestParams<TMachine>
 ): UseMachineReturnInitialized<TMachine> {
   const state = shallowRef<StateFrom<TMachine>>()
-  const path = ref<string>()
+  const path = ref<StateValueFrom<TMachine>>()
   const meta = shallowRef<TMeta>()
   const service = shallowRef<InterpreterFrom<TMachine>>()
 
   // Apparently it's important to start the inspector before the state machine is initialized
-  if (options?.inspect && process.env.NODE_ENV === 'development') {
+  if (options?.inspect && import.meta.env.DEV === true) {
     inspect({
-      iframe: false,
+      iframe: false
     })
   }
 
@@ -129,9 +129,9 @@ export function useXState<TMachine extends AnyStateMachine>(
     }
 
     const xstate = useMachine(machine, {
-      devTools: options?.inspect && process.env.NODE_ENV === 'development',
+      devTools: options?.inspect && import.meta.env.DEV === true,
       state: initialState,
-      ...options,
+      ...options
     })
 
     service.value = xstate.service
@@ -139,7 +139,7 @@ export function useXState<TMachine extends AnyStateMachine>(
 
     xstate.service.onTransition((newState) => {
       state.value = newState as StateFrom<TMachine>
-      path.value = getStatePath(newState)
+      path.value = getStatePath<TMachine>(state.value)
       meta.value = getMergedMeta(newState.meta)
     })
   }
@@ -161,19 +161,23 @@ export function useXState<TMachine extends AnyStateMachine>(
         restartWith(options.syncStateWith.value)
       },
       {
-        immediate: true,
+        immediate: true
       }
     )
   }
 
-  start()
+  if (options.syncStateWith?.value) {
+    start(options.syncStateWith.value)
+  } else {
+    start()
+  }
 
   const result = {
     state,
     path,
     meta,
     service,
-    restartWith,
+    restartWith
   }
 
   isInitializedXState<TMachine>(result)
@@ -181,9 +185,11 @@ export function useXState<TMachine extends AnyStateMachine>(
   return result
 }
 
-function getStatePath(state: TState) {
+function getStatePath<TMachine extends AnyStateMachine>(
+  state: StateFrom<TMachine>
+): StateValueFrom<TMachine> {
   const stateStrings = state.toStrings()
-  const path = stateStrings[stateStrings.length - 1]
+  const path = stateStrings[stateStrings.length - 1] as StateValueFrom<TMachine>
 
   return path
 }

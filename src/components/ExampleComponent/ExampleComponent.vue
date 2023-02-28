@@ -1,32 +1,63 @@
 <template>
-  <div class="ExampleComponent">Example Component</div>
+  <div class="ExampleComponent">
+    {{ xstate.path.value }}
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import type { PropType } from 'vue'
+
+const COMPONENT_NAME = 'ExampleComponent'
 
 export const propTypes = {
   myProp: {
-    allowed: ['example', 'anotherOne'] as const,
-    default: 'example' as const,
+    allowed: ['example', 'anotherOne'],
+    default: 'example'
   },
-}
-
-export interface Props {
-  myProp?: typeof propTypes.myProp.allowed[number]
-}
+  state: {
+    allowed: states
+  }
+} as const
 
 export default defineComponent({
-  name: 'ExampleComponent',
-  components: {},
+  name: COMPONENT_NAME
+})
+</script>
 
-  props: {
-    test: {
-      type: String as PropType<Props['myProp']>,
-      default: propTypes.myProp.default,
-    },
+<script setup lang="ts">
+import { toRef } from 'vue'
+
+import { useXState } from '@/composables/useXState'
+
+import { ExampleState, states, type State } from '@/components/ExampleComponent/ExampleState'
+
+export interface Props {
+  myProp?: (typeof propTypes.myProp.allowed)[number]
+  state: State
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  myProp: undefined
+})
+
+const emit = defineEmits<{
+  (event: 'example', id: string): void
+}>()
+
+const xstate = useXState(ExampleState, {
+  services: {
+    fetchSome: async () => {
+      await new Promise((resolve) => setTimeout(resolve, 500))
+    }
   },
+
+  actions: {
+    testAction: () => {
+      console.log('testAction')
+    }
+  },
+
+  syncStateWith: toRef(props, 'state')
 })
 </script>
 

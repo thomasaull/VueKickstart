@@ -1,9 +1,9 @@
-import type { Meta, Story } from '@/types/storybook'
+import type { Meta, Story, Action } from '@/types/storybook'
 
-import { withStates } from '@/../../.storybook/decorators'
-
-import ExampleComponent, { propTypes } from '@/components/ExampleComponent/ExampleComponent.vue'
-import type { Props } from '@/components/ExampleComponent/ExampleComponent.vue'
+import ExampleComponent, {
+  propTypes,
+  type Props
+} from '@/components/ExampleComponent/ExampleComponent.vue'
 
 interface Args extends Props {
   exampleArg: string
@@ -12,12 +12,15 @@ interface Args extends Props {
 const meta: Meta<Args> = {
   title: 'ExampleComponent',
   component: ExampleComponent,
-  decorators: [withStates],
 
   argTypes: {
     myProp: {
       control: 'select',
       options: propTypes.myProp.allowed
+    },
+    state: {
+      control: 'select',
+      options: propTypes.state.allowed
     }
   },
 
