@@ -1,3 +1,4 @@
+import type { StorybookConfig } from '@storybook/vue3-vite'
 import { mergeConfig, UserConfig, UserConfigExport } from 'vite'
 import { config as importedVueConfig, plugins } from '../vite.config'
 
@@ -11,23 +12,23 @@ function isUserConfig(config: UserConfigExport): asserts config is UserConfig {
   }
 }
 
-export default {
+const config: StorybookConfig = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
 
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
+    './my-addon/manager.js',
   ],
 
-  framework: '@storybook/vue3',
-
-  core: {
-    builder: '@storybook/builder-vite',
+  framework: {
+    name: '@storybook/vue3-vite',
+    options: {},
   },
 
-  features: {
-    storyStoreV7: true,
+  docs: {
+    autodocs: true,
   },
 
   async viteFinal(config) {
@@ -39,7 +40,8 @@ export default {
       plugins: plugins,
       css: vueConfig.css,
     })
-
     return finalConfig
   },
 }
+
+export default config
