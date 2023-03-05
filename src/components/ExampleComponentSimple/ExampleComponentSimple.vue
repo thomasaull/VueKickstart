@@ -1,5 +1,5 @@
 <template>
-  <div class="ExampleComponentSimple"></div>
+  <div class="ExampleComponentSimple">ExampleComponentSimple</div>
 </template>
 
 <script lang="ts">
@@ -10,7 +10,7 @@ const COMPONENT_NAME = 'ExampleComponentSimple'
 export const propTypes = {} as const
 
 export default defineComponent({
-  name: COMPONENT_NAME
+  name: COMPONENT_NAME,
 })
 </script>
 
