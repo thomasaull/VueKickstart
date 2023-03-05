@@ -32,3 +32,6 @@ coverage
 
 # xstate typegens
 *State.typegen.ts
+
+# generated component meta
+*.component-meta.ts
