@@ -1,3 +1,8 @@
+/**
+ * Heavily copied from
+ * @see https://github.com/statelyai/xstate-tools/blob/master/apps/cli/src/bin.ts
+ */
+
 import * as url from 'url'
 import fs from 'node:fs'
 import path from 'path'
@@ -5,6 +10,11 @@ import glob from 'glob'
 import type { ComponentMeta, MetaCheckerOptions } from 'vue-component-meta'
 import { createComponentMetaChecker } from 'vue-component-meta'
 import prettier from 'prettier'
+import { Command } from 'commander'
+import { watch } from 'chokidar'
+
+const program = new Command()
+const globPattern = './src/**/ExampleComponent.vue'
 
 const __dirname = url.fileURLToPath(new URL('../', import.meta.url))
 
@@ -14,24 +24,27 @@ const checkerOptions: MetaCheckerOptions = {
   printer: { newLine: 1 },
 }
 
-const checker = createComponentMetaChecker(
-  path.join(__dirname, './tsconfig.app.json'),
-  checkerOptions
-)
-
-// const allVueFiles = glob.sync('./src/**/*.vue')
-const allVueFiles = glob.sync('./src/**/ExampleComponent.vue')
-
-allVueFiles.forEach((filepath) => {
-  generateComponentMeta(filepath)
-})
+// const checker = createComponentMetaChecker(
+//   path.join(__dirname, './tsconfig.app.json'),
+//   checkerOptions
+// )
 
 async function generateComponentMeta(filePath: string) {
+  console.log('generateComponentMeta', filePath)
+
   const componentPath = path.join(__dirname, filePath)
 
   /**
    * Extract meta and create controls, etc…
    */
+
+  // checker.reload etc don't work properly, so easy/hacky fix is to
+  // recreate the checker every time a file should be processed
+  const checker = createComponentMetaChecker(
+    path.join(__dirname, './tsconfig.app.json'),
+    checkerOptions
+  )
+
   const componentMeta = checker.getComponentMeta(componentPath)
 
   const fileContents = {
@@ -57,7 +70,10 @@ async function generateComponentMeta(filePath: string) {
     parser: 'typescript',
   })
 
-  await fs.writeFileSync(filePathToSave, formatted)
+  console.log(formatted)
+
+  const result = await fs.writeFileSync(filePathToSave, formatted)
+  console.log(result)
 }
 
 type PropControlStringUnion = {
@@ -119,3 +135,36 @@ function createPropControlStringUnion(prop: ComponentMeta['props'][number]) {
 
   return result
 }
+
+// function runForAll() {
+//   const allVueFiles = glob.sync(globPattern)
+
+//   allVueFiles.forEach((filepath) => {
+//     generateComponentMeta(filepath)
+//   })
+// }
+
+program
+  .command('generate')
+  .description('Generate component meta from vue components')
+  .option('-w, --watch', 'Run the generator in watch mode')
+  .action(async (options: { watch?: boolean }) => {
+    if (options.watch) {
+      watch(globPattern, { awaitWriteFinish: true })
+        .on('add', generateComponentMeta)
+        .on('change', generateComponentMeta)
+    } else {
+      const tasks: Array<Promise<void>> = []
+
+      watch(globPattern, { persistent: false })
+        .on('add', (path) => {
+          tasks.push(generateComponentMeta(path))
+        })
+        .on('ready', async () => {
+          await Promise.all(tasks)
+          process.exit(0)
+        })
+    }
+  })
+
+program.parse(process.argv)
