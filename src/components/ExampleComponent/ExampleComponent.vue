@@ -9,6 +9,12 @@
     <br />
     <input :value="value" type="text" @input="emitInput" /> {{ value }}
     <br />
+    <input
+      :checked="checked"
+      type="checkbox"
+      @input="(event) => emit('update:checked', event?.target?.checked)"
+    />
+    <br />
     <button @click="emit('click')">Click me</button>
   </div>
 </template>
@@ -18,15 +24,15 @@ import { defineComponent } from 'vue'
 
 const COMPONENT_NAME = 'ExampleComponent'
 
-export const propTypes = {
-  myProp: {
-    allowed: ['example', 'anotherOne'],
-    default: 'example',
-  },
-  state: {
-    allowed: states,
-  },
-} as const
+// export const propTypes = {
+//   myProp: {
+//     allowed: ['example', 'anotherOne'],
+//     default: 'example',
+//   },
+//   state: {
+//     allowed: states,
+//   },
+// } as const
 
 export default defineComponent({
   name: COMPONENT_NAME,
@@ -45,15 +51,17 @@ import {
 } from '@/components/ExampleComponent/ExampleState'
 
 export interface Props {
-  myProp?: (typeof propTypes.myProp.allowed)[number]
-  state: State
+  // myProp?: (typeof propTypes.myProp.allowed)[number]
+  myProp?: 'example' | 'anotherExample'
+  state?: State
   message?: string
   date?: Date
   test?: boolean
   value?: string
   /** Das ist ein union type bla bla */
-  bla: 'test' | 'holla' | 'jo mei' | 'blabla blupp bla'
-  intUnion: 1 | 20 | 5
+  bla?: 'test' | 'holla' | 'jo mei' | 'blabla blupp die mamma pappa'
+  intUnion?: 1 | 20 | 5
+  checked?: boolean
 }
 
 export type Emit = {
@@ -66,6 +74,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<{
   (event: 'update:value', value: string): void
+  (event: 'update:checked', value: boolean): void
   (event: 'click'): void
 }>()
 

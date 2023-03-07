@@ -13,6 +13,8 @@ import prettier from 'prettier'
 import { Command } from 'commander'
 import { watch } from 'chokidar'
 
+// import type { ComponentMetaFinal } from '@/utilities/storybook'
+
 const program = new Command()
 const globPattern = './src/**/ExampleComponent.vue'
 
@@ -30,7 +32,7 @@ const checkerOptions: MetaCheckerOptions = {
 // )
 
 async function generateComponentMeta(filePath: string) {
-  console.log('generateComponentMeta', filePath)
+  // console.log('generateComponentMeta', filePath)
 
   const componentPath = path.join(__dirname, filePath)
 
@@ -59,8 +61,12 @@ async function generateComponentMeta(filePath: string) {
   const filePathToSave = filePath.replace(/\.(vue)$/, '.component-meta.ts')
   const prettierConfig = await prettier.resolveConfig(filePathToSave)
 
+  /**
+   * @todo JSON.stringify does not preserver `undefined` might need another method
+   * of serialization to make this work
+   */
   const output = `
-    export const componentMeta = ${JSON.stringify(fileContents)} as const
+    export const componentMeta = ${JSON.stringify(fileContents, null)} as const
 
     export default componentMeta
   `
@@ -73,7 +79,7 @@ async function generateComponentMeta(filePath: string) {
   console.log(formatted)
 
   const result = await fs.writeFileSync(filePathToSave, formatted)
-  console.log(result)
+  // console.log(result)
 }
 
 type PropControlStringUnion = {
@@ -108,9 +114,16 @@ function extractPropConrols(componentMetaProps: ComponentMeta['props']) {
 
 function checkIfAllStringsUnion(prop: ComponentMeta['props'][number]) {
   const typeItems = prop.type.split('|')
+  const ignore = ['undefined', 'null']
 
   const stringItems = typeItems.filter((typeItem) => {
     const trimmedTypeItem = typeItem.trim()
+
+    /**
+     * Ignore certain types like undefined or null
+     */
+    if (ignore.includes(trimmedTypeItem)) return true
+
     const startsWithQuote = trimmedTypeItem.startsWith('"')
     const endsWithQuote = trimmedTypeItem.endsWith('"')
 
@@ -124,6 +137,17 @@ function createPropControlStringUnion(prop: ComponentMeta['props'][number]) {
   const options = prop.type.split('|').map((typeItem) => {
     const trimmed = typeItem.trim()
     const withoutQuotes = trimmed.replaceAll('"', '')
+
+    /**
+     * Exceptions for certain typoes like undefined or null
+     */
+    if (withoutQuotes === 'undefined') {
+      return undefined
+    }
+
+    if (withoutQuotes === 'null') {
+      return null
+    }
 
     return withoutQuotes
   })
