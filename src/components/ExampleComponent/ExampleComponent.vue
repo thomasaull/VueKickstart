@@ -24,16 +24,6 @@ import { defineComponent } from 'vue'
 
 const COMPONENT_NAME = 'ExampleComponent'
 
-// export const propTypes = {
-//   myProp: {
-//     allowed: ['example', 'anotherOne'],
-//     default: 'example',
-//   },
-//   state: {
-//     allowed: states,
-//   },
-// } as const
-
 export default defineComponent({
   name: COMPONENT_NAME,
 })
@@ -65,7 +55,7 @@ export interface Props {
 }
 
 export type Emit = {
-  'update:value': string
+  addPerson: { name: string; age: number }
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -76,6 +66,7 @@ const emit = defineEmits<{
   (event: 'update:value', value: string): void
   (event: 'update:checked', value: boolean): void
   (event: 'click'): void
+  (event: 'addPerson', payload: Emit['addPerson']): void
 }>()
 
 function emitInput(event: Event) {

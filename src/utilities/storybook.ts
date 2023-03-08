@@ -91,13 +91,13 @@ export function createRenderFunction(
 
   const render: Story['render'] = {
     // @ts-expect-error Probably not working because of unknown component type
-    components: { component: context.component },
+    components: { storyComponent: context.component },
 
     setup() {
       return { args }
     },
 
-    template: '<component is="component" v-bind="args" />',
+    template: '<component is="storyComponent" v-bind="args" />',
 
     // props: Object.keys(context.argTypes),
     // template: '<component is="component" v-bind="$props" v-on="$props" />',
