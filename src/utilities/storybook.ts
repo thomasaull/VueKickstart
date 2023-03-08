@@ -72,6 +72,7 @@ export function createRenderFunction(
 
   // Create args update
   Object.entries(context.argTypes).forEach(([key, value]) => {
+    if (!value.table) return
     if (value.table.category !== 'events') return
 
     const isVModel = key.startsWith('update:')

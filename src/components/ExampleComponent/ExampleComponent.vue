@@ -1,11 +1,6 @@
 <template>
   <div class="ExampleComponent">
-    {{ xstate.path.value }}, {{ myProp }}
-    <br />
-    message: {{ message }}
-    <br />
-    date: {{ date }}
-
+    <h1>{{ greeting }}</h1>
     <br />
     <input :value="value" type="text" @input="emitInput" /> {{ value }}
     <br />
@@ -14,8 +9,6 @@
       type="checkbox"
       @input="(event) => emit('update:checked', event?.target?.checked)"
     />
-    <br />
-    <button @click="emit('click')">Click me</button>
   </div>
 </template>
 
@@ -41,16 +34,8 @@ import {
 } from '@/components/ExampleComponent/ExampleState'
 
 export interface Props {
-  // myProp?: (typeof propTypes.myProp.allowed)[number]
-  myProp?: 'example' | 'anotherExample'
-  state?: State
-  message?: string
-  date?: Date
-  test?: boolean
+  greeting?: 'Hello' | 'Good Day Sir' | 'Howdy' | 'Bla'
   value?: string
-  /** Das ist ein union type bla bla */
-  bla?: 'test' | 'holla' | 'jo mei' | 'blabla blupp die mamma pappa'
-  intUnion?: 1 | 20 | 5
   checked?: boolean
 }
 
@@ -58,9 +43,7 @@ export type Emit = {
   addPerson: { name: string; age: number }
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  myProp: undefined,
-})
+const props = withDefaults(defineProps<Props>(), {})
 
 const emit = defineEmits<{
   (event: 'update:value', value: string): void
