@@ -3,13 +3,13 @@
  * @source https://gist.github.com/rabelloo/bae0397d6a331d939eacdb3e8849220f
  */
 
-import { Meta as BaseMeta } from '@storybook/vue3/types-6-0'
+// import { Meta as BaseMeta } from '@storybook/vue3/types-6-0'
 import type { ArgType as BaseArgType } from '@storybook/addons'
-export { Story, Action } from '@storybook/vue3/types-6-0'
+// export { Story, Action } from '@storybook/vue3/types-6-0'
 
-export interface Meta<Args>
-  extends Omit<BaseMeta<Args>, 'argTypes'>,
-    Annotation<Args> {}
+// export interface Meta<Args>
+//   extends Omit<BaseMeta<Args>, 'argTypes'>,
+//     Annotation<Args> {}
 
 export type Action = unknown
 
