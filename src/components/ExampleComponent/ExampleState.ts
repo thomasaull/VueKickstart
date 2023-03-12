@@ -1,5 +1,5 @@
 import { createMachine } from 'xstate'
-import { extractAllStates } from '@/composition/useXState'
+import { extractAllStates } from '@/composables/useXState'
 
 import type { Typegen0 } from './ExampleState.typegen'
 
@@ -19,7 +19,7 @@ export const ExampleState = createMachine({
 
     context: {} as {
       myContextProp: number | undefined
-    }
+    },
   },
 
   id: 'ExampleState',
@@ -29,23 +29,23 @@ export const ExampleState = createMachine({
     default: {
       on: {
         GO: 'anotherState',
-        HO: 'anotherState'
+        HO: 'anotherState',
       },
 
       meta: {
-        jo: 'ho'
-      }
+        jo: 'ho',
+      },
     },
 
     anotherState: {
       on: {
-        GO: 'default'
+        GO: 'default',
       },
 
       entry: ['testAction'],
 
       meta: {
-        anotherStatesMeta: 'hello'
+        anotherStatesMeta: 'hello',
       },
 
       invoke: {
@@ -54,11 +54,11 @@ export const ExampleState = createMachine({
         onDone: {
           actions: () => {
             console.log('invoke done')
-          }
-        }
-      }
-    }
-  }
+          },
+        },
+      },
+    },
+  },
 })
 
 export const states = extractAllStates(ExampleState)

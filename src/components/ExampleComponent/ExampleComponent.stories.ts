@@ -1,46 +1,22 @@
-import type { Meta, Story, Action } from '@/types/storybook'
+import type { Meta, StoryObj } from '@storybook/vue3'
+import { generateStoryMeta, createRenderFunction } from '@/utilities/storybook'
 
-import ExampleComponent, {
-  propTypes,
-  type Props
-} from '@/components/ExampleComponent/ExampleComponent.vue'
+import ExampleComponent from '@/components/ExampleComponent/ExampleComponent.vue'
+import { componentMeta } from './ExampleComponent.component-meta'
 
-interface Args extends Props {
-  exampleArg: string
-}
+type Story = StoryObj<typeof ExampleComponent>
 
-const meta: Meta<Args> = {
+const meta: Meta<typeof ExampleComponent> = {
+  ...generateStoryMeta(ExampleComponent, {
+    componentMeta,
+  }),
+
   title: 'ExampleComponent',
   component: ExampleComponent,
-
-  argTypes: {
-    myProp: {
-      control: 'select',
-      options: propTypes.myProp.allowed
-    },
-    state: {
-      control: 'select',
-      options: propTypes.state.allowed
-    }
-  },
-
-  args: {
-    exampleArg: 'test',
-    myProp: propTypes.myProp.default
-  }
 }
+
 export default meta
 
-const Template: Story<Args> = (args, { argTypes }) => ({
-  components: { ExampleComponent },
-  props: Object.keys(argTypes),
-
-  template: `
-    <ExampleComponent
-      v-bind="$props"
-    />
-  `
-})
-
-export const Default = Template.bind({})
-Default.args = {}
+export const Default: Story = {
+  render: createRenderFunction,
+}
