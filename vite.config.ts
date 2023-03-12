@@ -1,11 +1,10 @@
-import path from 'path'
 import { fileURLToPath, URL } from 'node:url'
-import { defineConfig, type Plugin } from 'vite'
+import { defineConfig, type PluginOption } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import graphql from '@rollup/plugin-graphql'
 import svgLoader from 'vite-svg-loader'
 
-export const plugins: Plugin[] = [
+export const plugins: PluginOption[] = [
   graphql(),
   svgLoader({
     defaultImport: 'component',
@@ -14,12 +13,12 @@ export const plugins: Plugin[] = [
         {
           name: 'removeAttrs',
           params: {
-            attrs: '(stroke|fill|stroke-width|opacity)'
-          }
-        }
-      ]
-    }
-  })
+            attrs: '(stroke|fill|stroke-width|opacity)',
+          },
+        },
+      ],
+    },
+  }),
 ]
 
 // https://vitejs.dev/config/
@@ -28,8 +27,8 @@ export const config = defineConfig({
 
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
   },
 
   css: {
@@ -42,10 +41,10 @@ export const config = defineConfig({
           @use '@/assets/scss/mixins' as mixin;
           @use '@/assets/scss/functions' as function;
           @use '@/assets/scss/cssVar' as cssVar;
-        `
-      }
-    }
-  }
+        `,
+      },
+    },
+  },
 })
 
 export default config
