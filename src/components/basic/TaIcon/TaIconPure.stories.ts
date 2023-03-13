@@ -1,35 +1,22 @@
-import type { Meta, Story } from '@/types/storybook'
+import type { Meta, StoryObj } from '@storybook/vue3'
+import { generateStoryMeta, createRenderFunction } from '@/utilities/storybook'
 
-import TaIconPure, { propTypes } from '@/components/basic/TaIcon/TaIconPure.vue'
-import type { Props } from '@/components/basic/TaIcon/TaIconPure.vue'
+import TaIconPure from '@/components/basic/TaIcon/TaIconPure.vue'
+import { componentMeta } from './TaIconPure.component-meta'
 
-interface Args extends Props {
-  exampleArg: string
-}
+type Story = StoryObj<typeof TaIconPure>
 
-const meta: Meta<Args> = {
+const meta: Meta<typeof TaIconPure> = {
+  ...generateStoryMeta(TaIconPure, {
+    componentMeta,
+  }),
+
   title: 'TaIconPure',
   component: TaIconPure,
-
-  argTypes: {},
-
-  args: {
-    exampleArg: 'test',
-    name: 'settings'
-  }
 }
+
 export default meta
 
-const Template: Story<Args> = (args, { argTypes }) => ({
-  components: { TaIconPure },
-  props: Object.keys(argTypes),
-
-  template: `
-    <TaIconPure
-      v-bind="$props"
-    />
-  `
-})
-
-export const Default = Template.bind({})
-Default.args = {}
+export const Default: Story = {
+  render: createRenderFunction,
+}
