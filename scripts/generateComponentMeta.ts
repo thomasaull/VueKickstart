@@ -16,7 +16,7 @@ import { watch } from 'chokidar'
 // import type { ComponentMetaFinal } from '@/utilities/storybook'
 
 const program = new Command()
-const globPattern = './src/**/ExampleComponent.vue'
+const globPattern = './src/**/*.vue'
 
 const __dirname = url.fileURLToPath(new URL('../', import.meta.url))
 
@@ -26,14 +26,7 @@ const checkerOptions: MetaCheckerOptions = {
   printer: { newLine: 1 },
 }
 
-// const checker = createComponentMetaChecker(
-//   path.join(__dirname, './tsconfig.app.json'),
-//   checkerOptions
-// )
-
 async function generateComponentMeta(filePath: string) {
-  // console.log('generateComponentMeta', filePath)
-
   const componentPath = path.join(__dirname, filePath)
 
   /**
@@ -76,10 +69,7 @@ async function generateComponentMeta(filePath: string) {
     parser: 'typescript',
   })
 
-  console.log(formatted)
-
-  const result = await fs.writeFileSync(filePathToSave, formatted)
-  // console.log(result)
+  await fs.writeFileSync(filePathToSave, formatted)
 }
 
 type PropControlStringUnion = {
