@@ -2,14 +2,17 @@ import type { Meta, StoryObj, VueRenderer } from '@storybook/vue3'
 import type { ArgsStoryFn } from '@storybook/types'
 import { useArgs } from '@storybook/preview-api'
 
+type ArgTypeControl = {
+  control: 'select'
+  options: readonly (string | undefined | null)[]
+}
+
+type ArgTypeEvent = {
+  action: string
+}
+
 export type ComponentMeta = {
-  argTypes: Record<
-    string,
-    {
-      control: 'select'
-      options: readonly (string | undefined | null)[]
-    }
-  >
+  argTypes: Record<string, ArgTypeControl | ArgTypeEvent>
 }
 
 type Options<Component> = {
@@ -43,7 +46,7 @@ function normalizeArgs(
     if (!(key in context.argTypes)) return
 
     const argType = context.argTypes[key]
-    const controlType = argType.control.type
+    const controlType = argType.control?.type
 
     if (controlType === 'date') {
       args[key] = normalizeDate(value)
@@ -86,6 +89,7 @@ export function createRenderFunction(
     }
 
     args[eventName] = (newValue: any) => {
+      // TODO: Manuall dispatch event to pass to storybook
       updateArgs({ [argToUpdate]: newValue })
     }
   })
