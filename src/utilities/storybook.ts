@@ -64,9 +64,12 @@ function normalizeDate(value: unknown) {
   }
 }
 
+type Component = Parameters<RenderFunction>[1]['component']
+
 export function createRenderFunction(
   args: Parameters<RenderFunction>[0],
-  context: Parameters<RenderFunction>[1]
+  context: Parameters<RenderFunction>[1],
+  component?: Component
 ) {
   type Story = StoryObj<typeof context.component>
   const [_, updateArgs, resetArgs] = useArgs()
@@ -96,7 +99,7 @@ export function createRenderFunction(
 
   const render: Story['render'] = {
     // @ts-expect-error Probably not working because of unknown component type
-    components: { storyComponent: context.component },
+    components: { storyComponent: component ?? context.component },
 
     setup() {
       return { args }
