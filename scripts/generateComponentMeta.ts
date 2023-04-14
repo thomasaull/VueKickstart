@@ -6,7 +6,6 @@
 import * as url from 'url'
 import fs from 'node:fs'
 import path from 'path'
-import glob from 'glob'
 import type { ComponentMeta, MetaCheckerOptions } from 'vue-component-meta'
 import { createComponentMetaChecker } from 'vue-component-meta'
 import prettier from 'prettier'
@@ -26,25 +25,32 @@ const checkerOptions: MetaCheckerOptions = {
   printer: { newLine: 1 },
 }
 
+const checker = createComponentMetaChecker(
+  path.join(__dirname, './tsconfig.app.json'),
+  checkerOptions
+)
+
+/**
+ * Extract meta and create controls, etc…
+ */
 async function generateComponentMeta(filePath: string) {
   const componentPath = path.join(__dirname, filePath)
 
   /**
-   * Extract meta and create controls, etc…
+   * For watch mode we need to update the file content manually,
+   * otherwise an old cached version will be used
    */
-
-  // checker.reload etc don't work properly, so easy/hacky fix is to
-  // recreate the checker every time a file should be processed
-  const checker = createComponentMetaChecker(
-    path.join(__dirname, './tsconfig.app.json'),
-    checkerOptions
-  )
+  const fileContentsOfComponent = fs.readFileSync(componentPath, {
+    encoding: 'utf-8',
+  })
+  checker.updateFile(componentPath, fileContentsOfComponent)
 
   const componentMeta = checker.getComponentMeta(componentPath)
 
   const fileContents = {
     argTypes: {
       ...extractPropConrols(componentMeta.props),
+      ...extractActions(componentMeta.events),
     },
   }
 
@@ -57,18 +63,36 @@ async function generateComponentMeta(filePath: string) {
   /**
    * @todo JSON.stringify does not preserver `undefined` might need another method
    * of serialization to make this work
+   * Or maybe replace string `undefined` after JSON.stringify with String.replace?
    */
-  const output = `
+  let output = `
     export const componentMeta = ${JSON.stringify(fileContents, null)} as const
 
     export default componentMeta
   `
+
+  // Replace undefined
+  output = output.replace('"{undefined}"', 'undefined')
 
   const formatted = prettier.format(output, {
     ...prettierConfig,
     parser: 'typescript',
   })
 
+  /**
+   * Check if actual file content has changed and only write in this case
+   * otherwise a storybook refresh will be triggered
+   */
+  if (fs.existsSync(filePathToSave)) {
+    const oldFileContents = fs.readFileSync(filePathToSave, {
+      encoding: 'utf-8',
+    })
+
+    const hasChanged = oldFileContents !== formatted
+    if (!hasChanged) return
+  }
+
+  // console.log('update', filePathToSave)
   await fs.writeFileSync(filePathToSave, formatted)
 }
 
@@ -132,7 +156,7 @@ function createPropControlStringUnion(prop: ComponentMeta['props'][number]) {
      * Exceptions for certain typoes like undefined or null
      */
     if (withoutQuotes === 'undefined') {
-      return undefined
+      return '{undefined}'
     }
 
     if (withoutQuotes === 'null') {
@@ -148,6 +172,49 @@ function createPropControlStringUnion(prop: ComponentMeta['props'][number]) {
   }
 
   return result
+}
+
+type EventListener = `on${Capitalize<string>}`
+
+type ArgTypeAction = {
+  action: string
+}
+
+// Source: https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
+function capitalizeFirstLetter<Type extends string>(string: Type) {
+  const result = (string.charAt(0).toUpperCase() +
+    string.slice(1)) as Capitalize<typeof string>
+  return result
+}
+
+function extractActions(componentMetaEvents: ComponentMeta['events']) {
+  const argTypeActions: Record<EventListener, ArgTypeAction> = {}
+
+  componentMetaEvents.forEach((event) => {
+    // Normalize v-model eventListeners
+    const isModelEvent = event.name.search('update:') !== -1
+    let eventListener: EventListener = `on${capitalizeFirstLetter(event.name)}`
+
+    if (isModelEvent) {
+      const split = event.name.split(':')
+      if (!split[0] && !split[1])
+        throw new Error('split[0] or split[1] is undefined')
+
+      const firstPart = capitalizeFirstLetter(split[0]) as string
+      const secondPart = capitalizeFirstLetter(split[1]) as string
+      const merged = capitalizeFirstLetter(`${firstPart}${secondPart}`)
+
+      eventListener = `on${merged}`
+    }
+
+    if (eventListener === undefined) return
+
+    argTypeActions[eventListener] = {
+      action: event.name,
+    }
+  })
+
+  return argTypeActions
 }
 
 // function runForAll() {
