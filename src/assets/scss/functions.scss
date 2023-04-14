@@ -1,5 +1,54 @@
 @use 'sass:string';
+@use 'sass:math';
+@use '@/assets/scss/constants' as constant;
 
 @function getBlockName($block) {
   @return string.slice(#{$block}, 2);
+}
+
+/**
+ * Functions for interpolation with clamp
+ * @see: https://www.smashingmagazine.com/2022/10/fluid-typography-clamp-sass-functions/
+ */
+@function px-to-rem($px) {
+  $rems: math.div($px, 16px) * 1rem;
+  @return $rems;
+}
+
+@function round($number, $decimals: 0) {
+  $n: 1;
+  @if $decimals > 0 {
+    @for $i from 1 through $decimals {
+      $n: $n * 10;
+    }
+  }
+  @return math.div(math.round($number * $n), $n);
+}
+
+// See: https://stackoverflow.com/questions/10369643/rounding-numbers-in-sass-and-adjusting-the-amount-of-decimals
+@function roundWithDecimals($value, $fractionDigits: 0) {
+  $power: math.pow(10, $fractionDigits);
+  @return math.div(math.round($power * $value), $power);
+}
+
+@function fluid(
+  $min-size,
+  $max-size,
+  $min-breakpoint: constant.$contentMinWidth,
+  $max-breakpoint: constant.$contentMaxWidth,
+  $unit: vw
+) {
+  $slope: math.div($max-size - $min-size, $max-breakpoint - $min-breakpoint);
+  $slope-to-unit: roundWithDecimals($slope * 100, 2);
+  $intercept-rem: roundWithDecimals(
+    px-to-rem($min-size - $slope * $min-breakpoint),
+    2
+  );
+  $min-size-rem: roundWithDecimals(px-to-rem($min-size), 2);
+  $max-size-rem: roundWithDecimals(px-to-rem($max-size), 2);
+  @return clamp(
+    #{$min-size-rem},
+    #{$slope-to-unit}#{$unit} + #{$intercept-rem},
+    #{$max-size-rem}
+  );
 }
